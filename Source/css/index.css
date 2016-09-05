@@ -1,0 +1,136 @@
+/* CSS Document */
+#header{
+    padding: 0; 
+	margin: 0;
+}
+#main{width: 100%; overflow: hidden;}
+#bb{ background: #f3f3f3;}
+.container{ 
+    width:1000px;
+	margin: 0 auto;
+	background: #fff;
+}
+.linear{
+    width: 100%;
+	height: 24px;
+	background: -webkit-linear-gradient(left, #0b84bb , #8dbf46); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #0b84bb , #8dbf46); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #0b84bb , #8dbf46); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #0b84bb , #8dbf46); /* 标准的语法 */
+}
+.linear .top-p{
+    width:1000px;
+	margin: 0 auto;
+}
+.top-p p{
+    float: left;
+	color: #fff;
+	line-height: 2;
+}
+.top-p .t1 span{
+    padding-left: 10px;
+}
+.header-logo{
+    max-width: 100%;
+    height: 148px;
+    background:url(../image/da_bj.jpg) 100% 100%;
+}
+.header-logo .logo{
+    width: 1000px;
+	margin: 0 auto;
+}
+.logo img{
+    width: 680px; 
+	height: 90px; 
+	margin-top: 24px;
+}
+.navbor{
+    height: 40px;
+    background: #0b84bb;
+}
+nav{
+    width: 1000px;
+	margin: 0 auto;
+}
+nav a{
+    display: block;
+	float: left;
+    width: 11%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+nav a:hover{
+    height: 40px;
+    background: #94c536;
+}
+
+/* 框架iframe */
+.container .list_left{
+    float: left;
+    padding-top: 20px;
+	width: 220px;
+}
+.container .content_right{
+   float: right;
+   padding-top: 20px;
+   width: 77%;
+}
+.list_b, .con_b{
+   border: #2190ca 1px solid;
+}
+
+/*页尾 footer*/
+.WB_footer{
+   width: 100%;
+   margin-top: 30px;
+   padding-bottom: 10px;
+   background: #f3f3f3;
+   border-top: #ccc 1px solid;
+}
+.footer_link{
+  width: 1000px;
+  margin: 0 auto;
+  padding: 20px 50px;
+}
+.footer_link .list{
+    float: left;
+	margin: 0 40px 0 0;
+}
+.footer_link .list, .footer_link .list_tu{
+    display: inline;
+}
+.footer_link .list_tu{  
+    float: right;
+    text-align: right;
+	margin: 0 0 0 40px;
+}
+.footer_link .list dt{
+    padding: 0 0 15px 0;
+    white-space: nowrap;
+    width: 138px;
+} 
+.footer_link .list dd{ 
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+}
+.footer_link .list_tu dd{
+    color: #808080;
+}
+.footer_link .list .coll{
+   width: 48px;
+}
+.footer_link .list dd a{
+   color: #808080;
+}
+.footer_link .list dd a:hover{
+   color: #333;
+}
+.clearfix{
+   display: block;
+}
+.clearhid{
+   overflow: hidden;
+}
+
+

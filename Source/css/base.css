@@ -1,0 +1,29 @@
+/* CSS Document */
+body{
+   font: 12px/1.3 'Arial','Microsoft YaHei';
+}
+a{
+    color: #fff;
+	text-decoration:none;
+	cursor: pointer;
+}
+
+.fs12 { font-size: 12px }
+.fs14 { font-size: 14px }
+.fs16 { font-size: 16px }
+.fs18 { font-size: 18px }
+.fs24 { font-size: 24px }
+.fs36 { font-size: 36px }
+
+.w1000{ width: 1000px; margin: 0 auto;}
+
+.active{
+    background:  #94c536;
+}
+.icon{
+    float: left;
+	margin: 6px ;
+    height: 18px;
+	width: 4px;
+	background: #94c536;
+}
