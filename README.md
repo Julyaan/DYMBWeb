@@ -5,7 +5,7 @@
 
 
 ```
-  git add .
-  git commit -m '更新内容简要概括'
-  git push (输入用户名和密码)
-  ```
+git add .
+git commit -m '更新内容简要概括'
+git push (输入用户名和密码)
+```
