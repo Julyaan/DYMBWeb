@@ -46,16 +46,6 @@
   text-align: right;
 }
 /*left 边栏*/
-.filterinput{
-	background-color:rgba(249, 244, 244, 0);
-	border-radius:15px;
-	width:90%;
-	height:30px;
-	border:thin solid #FFF;
-	text-indent:0.5em;
-	font-weight:bold;
-	color:#FFF;
-}
 #demo-list a{
 	overflow:hidden;
 	text-overflow:ellipsis;
@@ -70,7 +60,30 @@
    line-height: 80px;
    padding-left: 24px;
 }
-
+.filterinput{
+	background-color: rgba(148, 197, 54, 0);
+    border-radius: 15px;
+	-moz-border-radius: 15px;      /* Gecko browsers */
+    -webkit-border-radius: 15px;   /* Webkit browsers */
+    border-radius: 15px;            /* W3C syntax */
+    width: 90%;
+    height: 30px;
+    border: thin solid #FFF;
+	padding-left: 20px;
+    text-indent: 0.5em;
+    font-weight: bold;
+    color: #FFF;
+}
+.filtersearch:before{
+    content: "\f002";
+    position: absolute;
+    left: 30px;
+    font-family: FontAwesome;
+    cursor: pointer;
+    top: 0;
+    color: #fff;
+    display: inline-block;
+}
 /*简介*/
 .dy_img{
     text-align: center;
@@ -84,7 +97,14 @@
 
 .content_doc .doc_img{ 
     float: left; 
-	width: 10%;
+	width: 14%;
+	text-align: center;
+}
+.content_doc .doc{ 
+    margin: 0 20px;
+}
+.content_doc .doc_img p{
+    margin: 10px 0;
 }
 .content_doc .doc_info{
    float: left;

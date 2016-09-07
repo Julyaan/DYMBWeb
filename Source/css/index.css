@@ -33,14 +33,14 @@
 .header-logo{
     max-width: 100%;
     height: 148px;
-    background:url(../image/da_bj.jpg) 100% 100%;
+    background:url(../image/da_bjt.jpg) 100% 100%;
 }
 .header-logo .logo{
     width: 1000px;
 	margin: 0 auto;
 }
 .logo img{
-    width: 680px; 
+    width: 660px; 
 	height: 90px; 
 	margin-top: 24px;
 }
@@ -55,7 +55,7 @@ nav{
 nav a{
     display: block;
 	float: left;
-    width: 11%;
+    width: 14.2%;
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
