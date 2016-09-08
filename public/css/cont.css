@@ -1,0 +1,183 @@
+/* CSS Document */
+.content_wz, .new_wz, .panel-3{
+    padding-top: 20px;
+}
+.content_new{
+    float: left;
+	width: 78%;
+}
+.new_list{
+    float: right;
+	width: 20%;
+}
+.new_b{
+    border: #ccc 1px solid;
+}
+.new_b .new_top{
+   height: 30px;
+   padding: 30px 20px 10px 20px;
+   text-align: center;
+   line-height:30px;
+}
+.new_b .new_con{
+   padding: 20px;
+   line-height: 30px;
+   text-align: left;
+}
+.inhaul{
+   height: 40px;
+   background: #0b84bb;
+   line-height: 40px;
+}
+.inhaul p{
+   padding: 0 20px;
+   color: #fff;
+}
+.inhaul p a:hover{ color: #FFFF99;}
+.line_info{
+   margin: 10px 20px;
+   border-bottom: #ccc 1px solid;
+   color: #999;
+}
+.line_info p{
+  height: 24px; 
+  padding: 0 30px;
+  line-height: 24px;
+  text-align: right;
+}
+/*left 边栏*/
+.filterinput{
+	background-color:rgba(249, 244, 244, 0);
+	border-radius:15px;
+	width:90%;
+	height:30px;
+	border:thin solid #FFF;
+	text-indent:0.5em;
+	font-weight:bold;
+	color:#FFF;
+}
+#demo-list a{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	white-space:nowrap;
+	width:100%;
+}
+.jquery-accordion-menu-top{
+   background: #94c536;
+   height: 80px;
+   color: #fff;
+   line-height: 80px;
+   padding-left: 24px;
+}
+
+/*简介*/
+.dy_img{
+    text-align: center;
+}
+.new_con p span{ color: #0b84bb;}
+
+/*doctor info*/
+.content_doc{
+    padding: 30px;
+}
+
+.content_doc .doc_img{ 
+    float: left; 
+	width: 10%;
+}
+.content_doc .doc_info{
+   float: left;
+   width: 82%;
+   padding-left: 30px;
+}
+.doc_info_l, .doc_info_r{
+   float: left;
+   width: 40%;
+}
+.doc_info_l .doc_info_t, .doc_info_r .doc_info_t{
+   height: 26px;
+   line-height: 26px;
+   text-align: left;
+}
+
+/*doctor info tab*/
+#tabs{
+   width: 100%;
+   margin: 0 auto;
+   padding-top: 40px;
+}
+#tabs p {
+    margin-bottom: 10px;
+    color: #444;
+    line-height: 150%;
+}
+#tabs li{
+   float: left;
+   margin-left: 2px;
+}
+#tabs li a{
+    display: block;
+    padding: 10px 22px;
+    background: #0b84bb;
+    text-decoration: none;
+    color: #fff;
+}
+.tabulous_active {
+    background: #ddecff !important;
+    color: #003366 !important;	
+}
+a, a:active, a:focus {
+    outline-color: -moz-use-text-color;
+    outline-style: none;
+    outline-width: 0;
+}
+.tabulousclear {
+    display: block;
+    clear: both;
+}
+#tabs_container {
+    width: 90%;
+    padding: 40px;
+    overflow: hidden;
+    position: relative;
+    background: #ddecff;
+	margin-left: 2px;
+}
+#tabs_container div {
+    margin-right: 40px;
+}
+.hidescale {
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -o-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+.make_transist {
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.showscale {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+    -webkit-transition-delay: .3s;
+    -moz-transition-delay: .3s;
+    -o-transition-delay: .3s;
+    -ms-transition-delay: .3s;
+    transition-delay: .3s;
+}
+

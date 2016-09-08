@@ -1,0 +1,272 @@
+/* CSS Document */
+.con-1{
+    width:100%;
+	height: 320px;
+	margin-top: 10px;
+}
+.con-2{
+    width:100%;
+	margin-top: 10px;
+}
+.title{
+    height: 30px;
+	padding: 6px 0 6px 0;
+	border-bottom: #CCC 1px solid;
+	line-height: 2;
+}
+.tl{
+	height: 30px;
+    line-height: 30px;
+}
+.title-xn{
+    width: 70%;
+    float: left;
+}
+.more{
+   width: 16%;
+   float: right;
+   text-align: right;
+   padding: 0 10px;
+}
+.more a:hover{
+     text-decoration: underline;
+}
+.btn-more{
+    float: right;
+	width: 44px;
+	display: block;
+	padding-top: 4px;
+}
+.btn-more a{
+    background: #94c536;
+	text-align: center;
+	display: block;
+	-moz-border-radius: 4px;      /* Gecko browsers */
+    -webkit-border-radius: 4px;   /* Webkit browsers */
+    border-radius: 4px;            /* W3C syntax */
+}
+.btn-more a:hover{
+    background: #7cae25;
+}
+
+/*切换图*/
+.new{
+    height: 244px;
+	padding: 16px 0 16px 0;
+}
+.new-ph{
+    width: 32%;
+	height: 244px;
+	float: left;
+	overflow: hidden;
+	position: relative;
+}
+.slider{position: absolute;}
+.slider li{ 
+    list-style:none;
+	display:inline;
+}
+.slider img{ 
+    width: 320px; 
+	height: 240px; 
+	display: block;
+}
+.slider2{ width: 1280px;}
+.slider2 li{ float:left;}
+.num{ 
+     position: absolute; 
+	 right: 5px;
+	 bottom: 10px;
+}
+.num li{
+	float: left;
+	color: #94c536;
+	text-align: center;
+	line-height: 16px;
+	width: 16px;
+	height: 16px;
+	font-family: Arial;
+	font-size: 12px;
+	cursor: pointer;
+	overflow: hidden;
+	margin: 3px 1px;
+	border: 1px solid #94c536;
+	background-color: #fff;
+}
+.num li.on{
+	color: #fff;
+	line-height: 21px;
+	width: 21px;
+	height: 21px;
+	font-size: 16px;
+	margin: 0 1px;
+	border: 0;
+	background-color: #94c536;
+	font-weight: bold;
+}
+
+
+
+.new-t{
+    width: 48%;
+	float: left;
+}
+.new-annou{
+    width: 20%;
+	float: left;
+}
+.login{
+    margin-top:8px;
+    height: 50px;
+	background: url(../image/btn_login.png) no-repeat;
+}
+.contact{
+    margin-top:8px;
+    height: 50px;
+	background: url(../image/btn_contact.png) no-repeat;
+}
+.login, .contact {
+    display: block;
+	width: 200px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+.new-t .new-title{
+    height: 20px;
+}
+.new-t .new-title>li{
+    float: left;
+	width: 100px;
+	height: 20px;
+	text-align: center;
+	line-height: 1.4;
+	border-right: 1px solid;
+	cursor: pointer;
+}
+.new-t .show{
+    color: #0b84bb;
+	border: #0b84bb;
+}
+.panel-1{ width: 24%; float: left; padding-right: 10px;}
+.panel-2{ width: 54%; float: left; padding-right: 10px;}
+.panel-3{ width: 20%; float: left;}
+.panel-4{ width: 47.3%; float: left; margin:6px;}
+.b{
+    height: 420px;
+    border: #2190ca 1px solid;
+}
+.g{
+    height: 126px;
+    border: #94c536 1px solid;
+}
+.panel-b, .panel-g{
+    -moz-border-radius: 4px;      /* Gecko browsers */
+    -webkit-border-radius: 4px;   /* Webkit browsers */
+    border-radius: 4px;            /* W3C syntax */
+}
+.panel-title-b, .panel-title-g{
+    height: 34px;
+	width:100%;
+}
+.top-b{
+    background: url(../image/u265.jpg) no-repeat;
+	background-size: 100% 34px;
+}
+.top-g{
+    background: url(../image/u257.png) no-repeat;
+	background-size: 100% 34px;
+}
+.panel-3 .panel-g{ height: 420px;}
+.panel-2 .panel-b .panel-lit{
+    border: #2190ca 1px solid; 
+    height: 180px;
+    -moz-border-radius: 4px;      /* Gecko browsers */
+    -webkit-border-radius: 4px;   /* Webkit browsers */
+    border-radius: 4px;  
+}
+.panel-lit .top-lit{
+    height: 30px;
+	width: 100%;
+	background: url(../image/u265.jpg) no-repeat;
+	background-size: 100% 30px;
+}
+
+/*new热点*/
+.contxt{
+    padding: 10px 20px 4px 20px;;
+}
+.summary{
+    width: 100%;
+	height: 34px;
+	line-height: 1.4;
+	border-bottom: #ccc 1px dashed;
+}
+.summary .t-icon {
+	margin: 0;
+	background: url(../image/p-icon-1.png) no-repeat left center;
+	line-height: 34px;
+	text-align: left;
+}
+.summary .t-icon .pp{
+    color: #333;
+	padding-left: 16px;
+}
+.summary .t-icon a:hover{
+    color: #94c536;
+}
+.pp span{
+    float: right;
+}
+
+/*公告，列表*/
+.annou-con{
+    padding: 0 10px 4px 10px;;
+}
+.menu{
+    width: 100%;
+	height: 30px;
+	margin: 0;
+	line-height: 30px;
+	text-align: left;
+}
+.menu .circle{
+   width: 6px;
+   height: 6px;
+   background: #999;
+   float:left;
+   margin-top: 14px;
+   -moz-border-radius: 50px;      /* Gecko browsers */
+   -webkit-border-radius: 50px;   /* Webkit browsers */
+   border-radius: 50px;            /* W3C syntax */
+}
+.menu .pp{
+    color: #333;
+	padding-left: 10px;
+}
+.menu a:hover{
+    color: #94c536;
+}
+
+/*doctor*/
+.layer{ 
+     height: 60px; 
+	 padding: 8px 0 8px 0;
+}
+.doctor{
+    padding: 0 10px;
+}
+.doctor img{ 
+    float: left; 
+	padding-right: 8px;
+}
+.doctor .doc-info{
+   float: left;
+   text-align: left;
+   line-height: 20px;
+}
+.doc-info .p{ color: #999;}
+.doc-info a{ color: #333; font-weight: bold;}
+.doc-info a:hover{ color: #94c536;}
+
+
