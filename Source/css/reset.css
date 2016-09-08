@@ -62,5 +62,7 @@ a {
     outline: none;
 }
 div, section{ display:block;}
-
+*:after, *:before {
+    box-sizing: border-box;
+}
 
