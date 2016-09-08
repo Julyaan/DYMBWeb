@@ -46,16 +46,6 @@
   text-align: right;
 }
 /*left 边栏*/
-.filterinput{
-	background-color:rgba(249, 244, 244, 0);
-	border-radius:15px;
-	width:90%;
-	height:30px;
-	border:thin solid #FFF;
-	text-indent:0.5em;
-	font-weight:bold;
-	color:#FFF;
-}
 #demo-list a{
 	overflow:hidden;
 	text-overflow:ellipsis;
@@ -70,7 +60,30 @@
    line-height: 80px;
    padding-left: 24px;
 }
-
+.filterinput{
+	background-color: rgba(148, 197, 54, 0);
+    border-radius: 15px;
+	-moz-border-radius: 15px;      /* Gecko browsers */
+    -webkit-border-radius: 15px;   /* Webkit browsers */
+    border-radius: 15px;            /* W3C syntax */
+    width: 90%;
+    height: 30px;
+    border: thin solid #FFF;
+	padding-left: 20px;
+    text-indent: 0.5em;
+    font-weight: bold;
+    color: #FFF;
+}
+.filtersearch:before{
+    content: "\f002";
+    position: absolute;
+    left: 30px;
+    font-family: FontAwesome;
+    cursor: pointer;
+    top: 0;
+    color: #fff;
+    display: inline-block;
+}
 /*简介*/
 .dy_img{
     text-align: center;
@@ -84,7 +97,14 @@
 
 .content_doc .doc_img{ 
     float: left; 
-	width: 10%;
+	width: 14%;
+	text-align: center;
+}
+.content_doc .doc{ 
+    margin: 0 20px;
+}
+.content_doc .doc_img p{
+    margin: 10px 0;
 }
 .content_doc .doc_info{
    float: left;
@@ -179,5 +199,146 @@ a, a:active, a:focus {
     -o-transition-delay: .3s;
     -ms-transition-delay: .3s;
     transition-delay: .3s;
+}
+
+/*research img 悬停*/
+.grid {
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+    list-style: none;
+    text-align: center;
+}
+.grid figure {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	overflow: hidden;
+	margin: -0.135em;
+	width: 30.1%;
+	height: 160px;
+	background: #3085a3;
+	cursor: pointer;
+}
+
+.grid figure img {
+	position: relative;
+	display: block;
+	min-height: 100%;
+	opacity: 0.8;
+}
+
+.grid figure figcaption {
+	padding: 1em;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 1.25em;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.grid figure figcaption::before,
+.grid figure figcaption::after {
+	pointer-events: none;
+}
+
+.grid figure figcaption,
+.grid figure a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 90%;
+	height: 90%;
+}
+/*覆盖img文字,btn*/
+.grid figure a {
+	z-index: 1000;
+	text-indent: 200%;
+	white-space: nowrap;
+	font-size: 0;
+	opacity: 0;
+}
+.grid figure h2 {
+	word-spacing: -0.15em;	
+	font-weight: 300;
+}
+.grid figure h2 span {
+	font-weight: 800;
+}
+.grid figure h2,
+.grid figure p {
+	margin: 0;
+}
+.grid figure p {
+	letter-spacing: 1px;
+	font-size: 68.5%;
+}
+/*sarah样式*/
+figure.effect-sarah {
+	background: #333;
+	float: left;
+	margin: 20px 15px;
+}
+
+figure.effect-sarah img {
+	width: -webkit-calc(100% + 20px);
+	width: calc(100% + 20px);
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+	-webkit-transform: translate3d(-10px,0,0);
+	transform: translate3d(-10px,0,0);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+figure.effect-sarah:hover img {
+	opacity: 0.4;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+figure.effect-sarah figcaption {
+	text-align: left;
+}
+
+figure.effect-sarah h2 {
+	position: relative;
+	overflow: hidden;
+	padding: 0.5em 0;
+}
+
+figure.effect-sarah h2::after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: #fff;
+	content: '';
+	-webkit-transition: -webkit-transform 0.35s;
+	transition: transform 0.35s;
+	-webkit-transform: translate3d(-100%,0,0);
+	transform: translate3d(-100%,0,0);
+}
+
+figure.effect-sarah:hover h2::after {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+figure.effect-sarah p {
+	padding: 1em 0;
+	opacity: 0;
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+	-webkit-transform: translate3d(100%,0,0);
+	transform: translate3d(100%,0,0);
+}
+
+figure.effect-sarah:hover p {
+	opacity: 1;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	color: #fff;
 }
 

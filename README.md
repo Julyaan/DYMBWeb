@@ -25,6 +25,7 @@ git pull(输入用户名和密码)
 
 ```
 copy bin/www.example bin/www (第一次运行即可)
+npm install supervisor -g（仅在第一次运行时输入）
 npm install
 npm start
 ```

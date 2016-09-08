@@ -41,6 +41,7 @@
     background: #94c536;
 	text-align: center;
 	display: block;
+    border-radius: 4px;
 	-moz-border-radius: 4px;      /* Gecko browsers */
     -webkit-border-radius: 4px;   /* Webkit browsers */
     border-radius: 4px;            /* W3C syntax */
@@ -125,15 +126,28 @@
     height: 50px;
 	background: url(../image/btn_contact.png) no-repeat;
 }
-.login, .contact {
+.login, .contact, .logUser, .contWe {
     display: block;
 	width: 200px;
 	height: 50px;
 	line-height: 50px;
-	text-align: center;
 }
-.new-t .new-title{
-    height: 20px;
+.login span{
+    padding-left: 40%;
+}
+.contact span{
+    padding-left: 20%;
+}
+.login a, .contact a{
+    -moz-border-radius: 6px;      /* Gecko browsers */
+    -webkit-border-radius: 6px;   /* Webkit browsers */
+    border-radius: 6px; 
+}
+.login a:hover{
+    box-shadow: inset 0px 0px 30px #ddecff;
+}
+.contact a:hover{
+   box-shadow: inset 0px 0px 30px #d9f8b8;
 }
 .new-t .new-title>li{
     float: left;
