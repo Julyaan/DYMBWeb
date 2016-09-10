@@ -20,7 +20,7 @@ router.get('/', function(req, res) {
 
 
 router.route('/login')
-    /* .get(function(req, res) {
+    .get(function(req, res) {
         if(req.session.islogin){
             res.locals.islogin=req.session.islogin;
         }
@@ -28,14 +28,19 @@ router.route('/login')
         if(req.cookies.islogin){
             req.session.islogin=req.cookies.islogin;
         }
-        res.render('login', { title: '用户登录' ,test:res.locals.islogin});
-    }) */
+        res.render('login', { 
+			title: '首页|大医慢病研究院', 
+			test:res.locals.islogin,
+			status1: 'active',status2: '',status3: '',status4: '',
+			status5: '',status6: '',status7: '',status8: '',status9: ''
+			});
+    })
     .post(function(req, res) {
         client=usr.connect();
         result=null;
         usr.selectFun(client,req.body.username, function (result) {
             if(result[0]===undefined){
-				 res.redirect('/re-login');
+				 res.redirect('/login');
             }else{
                 if(result[0].password===req.body.password){
                     req.session.islogin=req.body.username;
@@ -44,7 +49,7 @@ router.route('/login')
                     res.redirect('/home');
                 }else
                 {
-                    res.redirect('/re-login');
+                    res.redirect('/login');
                 }
                }
         });
@@ -71,31 +76,21 @@ router.get('/home', function(req, res) {
 	});
 });
 
-router.get('/re-login', function(req, res) {
-    if(req.session.islogin){
-        res.locals.islogin=req.session.islogin;
-    }
-    if(req.cookies.islogin){
-        req.session.islogin=req.cookies.islogin;
-    }
-   res.render('login', { 
-	title: '首页|大医慢病研究院', 
-	test:res.locals.islogin,
-	status1: 'active',status2: '',status3: '',status4: '',
-	status5: '',status6: '',status7: '',status8: '',status9: ''
-	});
-});
-
 router.route('/reg')
     .get(function(req,res){
-        res.render('reg',{title:'注册'});
+        res.render('reg', { 
+			title: '首页|大医慢病研究院', 
+			test:res.locals.islogin,
+			status1: 'active',status2: '',status3: '',status4: '',
+			status5: '',status6: '',status7: '',status8: '',status9: ''
+			});
     })
     .post(function(req,res) {
         client = usr.connect();
 
-        usr.insertFun(client,req.body.username ,req.body.password2, function (err) {
+        usr.insertFun(client,req.body.username ,req.body.confirm, function (err) {
               if(err) throw err;
-              res.send('注册成功');
+              res.redirect('/reg');
         });
     });
 	
