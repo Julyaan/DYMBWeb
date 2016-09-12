@@ -358,7 +358,7 @@
 						<a style="color:#2079A7">忘记密码</a>
 				  </label>
 				</div>
-				<button type="submit" id="" style="width:300px" class="am-btn am-btn-md am-btn-secondary am-round btn-loading-example" data-am-loading="{spinner: 'circle-o-notch', loadingText: '正在提交...', resetText: '已提交'}">登录</button>
+				<button type="submit" id="loading-login" style="width:300px" class="am-btn am-btn-md am-btn-secondary am-round btn-loading-example" data-am-loading="{spinner: 'circle-o-notch', loadingText: '正在提交...', resetText: '已提交'}">登录</button>
 			</div>
 			<p style="margin: auto;padding:7px"><small style="font-size:110%">还没账户？马上<a style="color:#3bb4f2" onclick="showReg()">注册</a></small></p>	
 		</form>
@@ -431,12 +431,12 @@
 					<div class="am-u-sm-9">
 						<div class="am-cf"> 
 							<input class="am-fl am-form-field" type="text" name="" id="input1" value="" placeholder="填写收到的验证码"  style="width: 150px;">
-							<button type="button" style="float: left;margin-left: 10px;" class="am-btn am-btn-sm am-btn-primary btn-loading-example" data-am-loading="{spinner: 'circle-o-notch', loadingText: '正在发送...', resetText: '获取短信验证码'}">获取短信验证码</button>
+							<button type="button" id="loading-btn" style="float: left;margin-left: 10px;" class="am-btn am-btn-sm am-btn-primary btn-loading-example" data-am-loading="{spinner: 'circle-o-notch', loadingText: '正在发送...', resetText: '获取短信验证码'}">获取短信验证码</button>
 						</div>
 					</div>
 				</div>
 			  <br />
-			 <button type="submit" id="submit_register" style="margin-top:10px;width:300px" class="am-btn am-btn-md am-btn-secondary am-round btn-loading-example">立即注册</button>
+			 <button type="submit" disabled="true" id="submit_register" style="margin-top:10px;width:300px" class="am-btn am-btn-md am-btn-secondary am-round btn-loading-example"  data-am-loading="{spinner: 'circle-o-notch', loadingText: '正在注册...', resetText: '抱歉，请稍后重试'}">立即注册</button>
 			</form>
 			<!-- ----- -->
 				
@@ -532,7 +532,7 @@ $(document).ready(function(){
 		else
 			$("#hint_key2").show();
 	});
-	$('.btn-loading-example').click(function () {
+	$('#loading-btn').click(function () {
 		var $btn = $(this);
 		time=60;
 		$btn.button('loading');
@@ -546,6 +546,20 @@ $(document).ready(function(){
 		}, 1000);
 
 		});
+	$('#submit_register').click(function () {
+		  var $btn = $(this)
+		  $btn.button('loading');
+			setTimeout(function(){
+			  $btn.button('reset');
+		  }, 5000);
+		});
+	$('#loading-login').click(function () {
+	  var $btn = $(this)
+	  $btn.button('loading');
+		setTimeout(function(){
+		  $btn.button('reset');
+	  }, 5000);
+	});
 });
 </script>
 </body>
