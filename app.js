@@ -52,9 +52,14 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
+	console.log('err:'+err);
     res.render('error', {
       message: err.message,
-      error: err
+      error: err,
+	  title: '错误', 
+	  test:res.locals.islogin,
+	  status1: 'active',status2: '',status3: '',status4: '',
+	  status5: '',status6: '',status7: '',status8: '',status9: ''
     });
   });
 }
@@ -65,7 +70,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
-    error: {}
+    error: {},
+	title: '错误', 
+	test:res.locals.islogin,
+	status1: 'active',status2: '',status3: '',status4: '',
+	status5: '',status6: '',status7: '',status8: '',status9: ''
   });
 });
 

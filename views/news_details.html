@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<!--网页页头-->
+<%- include header %>	
+<!--end-->
+
+<!--网页主体-->
+<div id="main">
+     <div class="container">	 
+	     <div class="content_new content_wz">
+		      <div class="inhaul cont_inh">
+			      <p><a href="#">首页</a><span> > </span><a href="/news">新闻动态</a><span> > </span><a href="#">新闻详情</a></p>
+			  </div>
+		      <div class="new_b clearhid">
+			      <div class="new_top"><h3 class="new_t fs18"><%= news_title %></h3></div>
+				  <div class="line_info"><p class="fs12"><%= news_date %></p></div>
+				  <div class="new_con fs14"><%- news_body %></div>
+			  </div>
+		 </div>
+		 
+	
+		 <div class="panel-3" style="float: right">
+			      <div class="panel-g g">
+				        <div class="panel-title-g top-g"><div class="title-xn fs14"><span class="icon"></span>新闻热点</div></div>
+                        <div class="annou-con">
+				           <div class="menu fs14">
+							       <span class="circle"></span>
+							       <a class="pp" href="/news_details?id=1">抚余市工作调研</a>
+						   </div>
+						   <div class="menu fs14">
+							       <span class="circle"></span>
+							       <a class="pp" href="/news_details?id=2">河北大学附属医院慢病…</a>
+						   </div>
+						   <div class="menu fs14">
+							       <span class="circle"></span>
+							       <a class="pp" href="/news_details?id=3">民政十三五规划公布医…</a>
+						   </div>
+						   <div class="menu fs14">
+							       <span class="circle"></span>
+							       <a class="pp" href="/news_details?id=4">全国卫生与健康大会19…</a>
+						   </div>
+						   <div class="menu fs14">
+							       <span class="circle"></span>
+							       <a class="pp" href="/news_details?id=5">健康中国2030规划纲要…</a>
+						   </div>
+						   <div class="menu fs14">
+							       <span class="circle"></span>
+							       <a class="pp" href="/news_details?id=6">全生命周期自始至终防…</a>
+						   </div>
+						   
+				       </div>	 
+			     </div>
+		     </div>
+
+	 </div>
+</div>
+<!--end-->
+
+<!--网页页尾-->
+<%- include footer %>
+<!--end-->
+</body>
+</html>

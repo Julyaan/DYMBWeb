@@ -191,7 +191,7 @@
     background: url(../image/u257.png) no-repeat;
 	background-size: 100% 34px;
 }
-.panel-3 .panel-g{ height: 420px;}
+.panel-3 .panel-g{ height: auto;}
 .panel-2 .panel-b .panel-lit{
     border: #2190ca 1px solid; 
     height: 180px;

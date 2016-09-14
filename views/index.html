@@ -1,19 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-<meta name="viewport" content="width=device-width, initial-scale=1" />  
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><%= title %> </title>
-<link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
-<link href="/css/reset.css" rel="stylesheet" type="text/css" />
-<link href="/css/base.css" rel="stylesheet" type="text/css" />
-<link href="/css/index.css" rel="stylesheet" type="text/css" />
-<link href="/css/home.css" rel="stylesheet" type="text/css" />
-
-</head>
-
-<body>
 
 <%- include header %>
 
@@ -60,26 +46,27 @@
 				        <li>学术论文</li>
 				        <li>慢病咨询</li>
 				     </ul>
-				     <div class="contxt">
+			     <div class="contxt" id="con_1">
 				         <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="new_details.html" target="_blank">抚余市工作调研<span>2015-09-09</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=1">抚余市工作调研<span>2016-09-09</span></a></div>
 						 </div>
 						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="#">抚余市工作调研<span>2015-09-09</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=2">河北大学附属医院慢病研讨会<span>2016-07-08</span></a></div>
 						 </div>
 						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="#">抚余市工作调研<span>2015-09-09</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=3">民政十三五规划公布 医养结合型养老机构成发展重点<span>2016-06-17</span></a></div>
 						 </div>
 						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="#">抚余市工作调研<span>2015-09-09</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=4">全国卫生与健康大会19日至20日在京召开<span>2016-06-09</span></a></div>
 						 </div>
 						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="#">抚余市工作调研<span>2015-09-09</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=5">健康中国2030规划纲要审议通过<span>2016-05-19</span></a></div>
 						 </div>
 						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="#">抚余市工作调研<span>2015-09-09</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=6">健康管理|全生命周期 自始至终防慢病<span>2016-05-09</span></a></div>
 						 </div>
 				     </div>
+
 			     </div>
 				 <!--公告-->
 				 <div class="new-annou">
@@ -127,29 +114,13 @@
 			      <div class="panel-b b">
 				        <div class="panel-title-b top-b">
 						     <div class="title-xn fs14 tl"><span class="icon"></span>专家介绍</div>
-							 <div class="more tl"><a href="intr_moral.html" target="_blank">MORE</a></div>
+							 <div class="more tl"><a href="doctor_more.html" target="_blank">MORE</a></div>
 						</div>
-						<div class="doctor">
-						  <div class="layer">
-						      <a href="doctor_info.html"><img src="image/doc_img_yl.jpg"/></a>
-							  <div class="doc-info fs12">
-							      <a class="doc-n" href="doctor_info.html" name="docname"> 尹岭</a>
-								  <p class="p">神经内科&nbsp;&nbsp;主任医师</p>
-								  <p class="p">中国人民解放军总院</p>
-							  </div> 
-						  </div>
-						  <div class="layer">
-						      <a href="#"><img src="image/doc_img_lsb.jpg"/></a>
-							  <div class="doc-info fs12">
-							      <a class="doc-n" href="#" name="docname"> 卢世璧</a>
-								  <p class="p">骨科&nbsp;&nbsp;骨科研究所所长</p>
-								  <p class="p">中国人民解放军总院</p>
-							  </div> 
-						  </div>
+						<div class="doctor">						  
 						  <div class="layer">
 						      <a href="#"><img src="image/doc_img_zns.jpg"/></a>
 							  <div class="doc-info fs12">
-							      <a class="doc-n" href="#" name="docname"> 钟南山</a>
+							      <a class="doc-n" href="doctor_info_zns.html" target="_blank"> 钟南山</a>
 								  <p class="p">呼吸科&nbsp;&nbsp;研究所所长</p>
 								  <p class="p">广州呼吸疾病研究所</p>
 							  </div> 
@@ -157,7 +128,7 @@
 						  <div class="layer">
 						      <a href="#"><img src="image/doc_img_cxm.jpg"/></a>
 							  <div class="doc-info fs12">
-							      <a class="doc-n" href="#" name="docname"> 陈香美</a>
+							      <a class="doc-n" href="doctor_info_cxm.html" name="docname"> 陈香美</a>
 								  <p class="p">肾脏病学&nbsp;&nbsp;主任医师</p>
 								  <p class="p">中国人民解放军总院</p>
 							  </div> 
@@ -168,6 +139,22 @@
 							      <a class="doc-n" href="#" name="docname">邱贵兴</a>
 								  <p class="p">骨科&nbsp;&nbsp;主任医师</p>
 								  <p class="p">北京协和医院</p>
+							  </div> 
+						  </div>
+						  <div class="layer">
+						      <a href="doctor_info.html"><img src="image/doc_img_wc.jpg"/></a>
+							  <div class="doc-info fs12">
+							      <a class="doc-n" href="#" name="docname"> 王辰</a>
+								  <p class="p">呼吸科&nbsp;&nbsp;院士</p>
+								  <p class="p">中日医院</p>
+							  </div> 
+						  </div>
+						  <div class="layer">
+						      <a href="#"><img src="image/doc_img_lsb.jpg"/></a>
+							  <div class="doc-info fs12">
+							      <a class="doc-n" href="#" name="docname"> 卢世璧</a>
+								  <p class="p">骨科&nbsp;&nbsp;研究所所长</p>
+								  <p class="p">中国人民解放军总院</p>
 							  </div> 
 						  </div>
 						</div>					
@@ -187,23 +174,23 @@
 							<div class="annou-con">
 							    <div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">心脑血管疾病主要包括哪些？</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">中国面临心脑血管病大流行</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">预防心脑血管病 警惕隐性血栓</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">《中国心血管病报告》在沈发布</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">  心血管病死亡率仍居首位</a>
 						        </div>
 							</div>   
 						</div>		
@@ -215,23 +202,23 @@
 							<div class="annou-con">
 							    <div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">三大生活细节让你远离脑肿瘤</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">肿瘤已被认领</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">肿瘤 锁定</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">肿瘤预防 锁定</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">癌症的预防与治疗</a>
 						        </div>
 							</div>   
 						</div>		
@@ -243,23 +230,23 @@
 							<div class="annou-con">
 							    <div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">慢阻肺 锁定</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">慢阻肺定义 慢阻肺是什么病</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">慢阻肺治疗展望.ppt</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">关注慢阻肺永远不晚(图)</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">慢阻肺患者健康生活</a>
 						        </div>								
 							</div>   
 						</div>		
@@ -271,23 +258,23 @@
 							<div class="annou-con">
 							    <div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">中国医养结合模式深度调研</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">解密“医养结合”</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">南通市医养结合提案</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">“医养结合”还需迈过几道坎儿</a>
 						        </div>
 								<div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="#">关于加快推进“医养结合”养老模式的提案</a>
 						        </div>								
 							</div>   
 						</div>		
@@ -446,7 +433,7 @@
 	</div>										
 </div>
 <!--网页页尾-->
-<iframe src="bottom.html"  width="100%" height="194" frameborder="0"></iframe>
+<%- include footer %>
 <!--end-->
 
 <script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script>
@@ -461,7 +448,7 @@ var showReg = function(){
 var showLogin = function(){
 	$("#reg-modal").modal("close");
 	$("#login-modal").modal("open");
-	}
+	} 
 $(document).ready(function(){
 	$("#phone").blur(function(){
 		var color = $("#hint1").children("font").attr("color");
