@@ -4,14 +4,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />  
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><%= title %> | 大医慢病研究院</title>
-<link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
-<link href="/css/reset.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/reset.css" rel="stylesheet" />
 <link href="/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/css/index.css" rel="stylesheet" type="text/css" />
 <link href="/css/home.css" rel="stylesheet" type="text/css" />
 <link href="/css/cont.css" rel="stylesheet" type="text/css" />
 <link href="/css/jquery-accordion-menu.css" rel="stylesheet" type="text/css" />
 <link href="/css/font-awesome.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	.title,
+	.more.tl,
+	.panel-1,
+	.panel-2,
+	.layer{
+	-webkit-box-sizing:content-box;
+	box-sizing:content-box;	
+	}
+</style>
 </head>
 
 <body>
@@ -23,10 +33,14 @@
 		   </p>
 		   <% if(locals.islogin) { %>
 		   <p class="fs12 t1" style="float:right">
-		     <i class="am-icon-user"></i>&nbsp;&nbsp;用户&nbsp;&nbsp;<a><%= test %></a>！<span><a href="/logout">注销</a></span>
+		     <i class="fa fa-user"></i>&nbsp;&nbsp;用户&nbsp;&nbsp;<a><%= test %></a>|<span><a href="/logout">注销</a></span>
 		   </p>
-		   <% } %>
-		</div>
+		   <% } else { %>
+			<p class="fs12 t1" style="float:right">
+		     <span><a href="/?login_num=1">【登陆】</a></span><span><a href="/?login_num=2">【注册】</a></span>
+		   </p>
+		    <% } %>
+		   </div>
 	</div>
 	<div class="header-logo">
 	    <div class="logo"><img src="image/logo_dymb.png"></div>
@@ -37,7 +51,7 @@
 	   <a class="<%= status2 %>" href="/introduce">简介</a>
 	   <a class="<%= status3 %>" href="/news" >新闻动态</a>
 	   <a class="<%= status4 %>" href="/research" >慢病研究</a>
-	   <a class="<%= status5 %>" href="blank_space.html" >研究基地</a>
+	   <a class="<%= status5 %>" href="/bases" >研究基地</a>
 	   <a class="<%= status6 %>" href="/doctor_more" >专家资源</a>
 	   <a class="<%= status7 %>" href="blank_space.html" >人才培养</a>
 	   <a class="<%= status8 %>" href="blank_space.html" >学术交流</a>

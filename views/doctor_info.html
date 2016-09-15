@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<!--网页页头-->
+<%- include header %>
+<!--end-->
+
+<!--网页主体-->
+<div id="main">
+    <div class="container beij">
+	    <div class="content_wz">
+		      <div class="inhaul cont_inh">
+			      <p><a href="#">首页</a><span> > </span><a href="/doctor_more">专家团队</a><span> > </span><a href="#">专家详情</a></p>
+			  </div>
+		      <div class="new_b clearhid">
+                <div class="content_doc">
+				   <div class="clearhid">
+				      <div class="doc_img"><img src="image/<%= doctor.avatar %>"></div>
+					  <div class="doc_info">
+					      <div class="doc_info_l">
+						     <div class="doc_info_t"><p>姓名：<span class="ff"><%= doctor.name %></span></p></div>
+							 <div class="doc_info_t"><p>专业：<span class="ff"><%= doctor.major %></span></p></div>
+							 <div class="doc_info_t"><p>籍贯：<span class="ff"><%= doctor.birthplace %></span></p></div>
+							 <div class="doc_info_t"><p>出身年月：<span class="ff"><%= doctor.birthdate %></span></p></div>
+							 <div class="doc_info_t"><p>毕业院校：<span class="ff"><%= doctor.graduates %></span></p></div>
+						  </div>
+						  <div class="doc_info_r">
+						     <div class="doc_info_t"><p>职称：<span class="ff"><%= doctor.title %></span></p></div>
+							 <div class="doc_info_t"><p>学位：<span class="ff"><%= doctor.degree %></span></p></div>
+							 <div class="doc_info_t"><p>职务：<span class="ff"><%= doctor.job %></span></p></div>
+							 <div class="doc_info_t"><p>工作单位：<span class="ff"><%= doctor.workplace %></span></p></div>
+							 <div class="doc_info_t"><p>出诊时间：<span class="ff"><%= doctor.worktime %></span></p></div>
+						  </div>
+					  </div>	
+				   </div>
+				 <!--doctor info tabs-->			 
+				   <div id="tabs">
+					     <ul>
+			               <li><a href="#tabs-1" title="">专业特长</a></li>
+		                   <li><a href="#tabs-2" title="">研究方向</a></li>
+			               <li><a href="#tabs-3" title="">学习经历</a></li>
+						   <li><a href="#tabs-4" title="">就职经历</a></li>
+						   <li><a href="#tabs-5" title="">社会任职</a></li>
+						   <li><a href="#tabs-6" title="">科研成就</a></li>
+						   <li><a href="#tabs-7" title="">承担课题</a></li>
+						   <li><a href="#tabs-8" title="">文章专著</a></li>
+						   <li><a href="#tabs-9" title="">所获荣誉</a></li>
+						   <li><a href="#tabs-10" title="">其他</a></li>
+		                 </ul>
+						 <div id="tabs_container">
+						      <div id="tabs-1">
+								<%- doctor.info01 %>
+		                     </div>
+                             <div id="tabs-2">
+								<%- doctor.info02 %>
+	                         </div>
+                             <div id="tabs-3">
+			                    <%- doctor.info03 %>
+	                    	</div>
+							<div id="tabs-4">
+								<%- doctor.info04 %>
+							</div>
+							<div id="tabs-5">
+								<%- doctor.info05 %>
+							</div>
+							<div id="tabs-6">
+							    <%- doctor.info06 %>
+							</div>
+							<div id="tabs-7">
+								<%- doctor.info07 %>
+							</div>
+							<div id="tabs-8">
+							   <%- doctor.info08 %>
+							</div>
+							<div id="tabs-9">
+								<%- doctor.info09 %>
+							</div>
+							<div id="tabs-10">
+							     <%- doctor.info10 %>
+							</div>
+						 </div>
+				    </div>
+					 <!--End tabs-->
+					 
+				</div>  
+		    </div>
+	    </div>
+    </div>
+</div>
+<!--end-->
+
+
+<!--网页页尾-->
+<%- include footer %>
+<!--end-->
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/tabulous.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+</body>
+</html>

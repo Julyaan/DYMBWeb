@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<!--网页页头-->
+<%- include header %>
+<!--end-->
+
+<!--网页主体-->
+<div id="main">
+ <div class="container beij">
+
+   <div class="content_wz">
+	    <div class="inhaul cont_inh">
+			      <p><a href="#">首页</a><span> > </span><a href="/research">慢病研究</a><span> > </span><a href="#">医养结合研究中心</a></p>
+			  </div>
+		      <div class="new_b clearhid">
+			       <div class="contxt">
+				         <div class="summary sum_list fs14">
+						    <div class="t-icon"><a class="pp" href="/research_details?id=300">中国医养结合模式深度调研<span>2016-09-09</span></a></div>
+						 </div>
+						 <div class="summary sum_list fs14">
+						    <div class="t-icon"><a class="pp" href="/news_details?id=3001">解密“医养结合”<span>2016-07-04</span></a></div>
+						 </div>
+				         <div class="summary sum_list fs14">
+						    <div class="t-icon"><a class="pp" href="/news_details?id=3001">南通市医养结合提案<span>2016-06-17</span></a></div>
+						 </div>
+						 <div class="summary sum_list fs14">
+						    <div class="t-icon"><a class="pp" href="/news_details?id=3001">“医养结合”还需迈过几道坎儿<span>2016-06-09</span></a></div>
+						 </div>
+						 <div class="summary sum_list fs14">
+						    <div class="t-icon"><a class="pp" href="/news_details?id=3001">关于加快推进“医养结合”养老模式的提案<span>2016-05-19</span></a></div>
+						 </div>
+				         
+				    </div>
+					 <br/><br/><br/>
+			  </div>
+       </div>
+ </div>
+</div>
+<!--end-->
+
+
+<!--网页页尾-->
+<%- include footer %>
+<!--end-->
+<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script src="js/jquery-accordion-menu.js" type="text/javascript"></script>
+<script type="text/javascript">
+jQuery(document).ready(function () {
+	jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+	
+});
+
+$(function(){	
+	//侧边导航切换
+	$("#demo-list li").click(function(){
+		$("#demo-list li.active").removeClass("active")
+		$(this).addClass("active");
+	})	
+})	
+</script>
+</body>
+</html>

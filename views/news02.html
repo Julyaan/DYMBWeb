@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<!--网页页头-->
+<%- include header %>
+<!--end-->
+
+<!--网页主体-->
+<div id="main">
+ <div class="container beij">
+  <div class="list_left clearhid">
+   <div class="content">
+	 <div id="jquery-accordion-menu" class="jquery-accordion-menu blue">
+		<div class="jquery-accordion-menu-top fs16">新闻动态</div>
+		<ul id="demo-list">			
+		    <li><a href="/news"><i class="fa fa-home"></i>动态要闻</a></li>
+			<li class="active"><a href="/new02"><i class="fa fa-user"></i>政策咨询</a></li>
+			<li><a href="/news03"><i class="fa fa-flag"></i>学术论文</a></li>
+			<li><a href="/news04"><i class="fa fa-user"></i>慢病咨询</a></li>
+			<li><a href="#"><i class="fa fa-bookmark"></i>公告栏</a></li>		   
+		</ul>
+				
+	  </div>
+   </div>
+   
+</div>
+
+   <div class="content_right">
+	    <div class="inhaul cont_inh">
+		  <p><a href="#">首页</a><span> > </span><a href="#">新闻动态</a><span> > </span><a href="#">政策咨询</a></p>
+		</div>
+		<div class="new_b clearhid">
+		   <div class="contxt">
+				 <div class="summary sum_list fs14">
+					<div class="t-icon"><a class="pp" href="/news_details?id=1001">大病及慢性病医保政策新调整<span>2016-09-05</span></a></div>
+				 </div>
+				 <div class="summary sum_list fs14">
+					<div class="t-icon"><a class="pp" href="/news_details?id=1002">十三五规划建议：降低大病慢性病医疗费用<span>2016-09-10</span></a></div>
+				 </div>
+				 <div class="summary sum_list fs14">
+					<div class="t-icon"><a class="pp" href="/news_details?id=1003">中国慢性病防治工作规划(2012—2015年)<span>2016-09-10</span></a></div>
+				 </div>		 	 
+			</div>
+			<br/><br/><br/>
+		</div>
+    </div>
+ </div>
+</div>
+<!--end-->
+
+
+<!--网页页尾-->
+<%- include footer %>
+<!--end-->
+<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script src="js/jquery-accordion-menu.js" type="text/javascript"></script>
+<script type="text/javascript">
+jQuery(document).ready(function () {
+	jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+	
+});
+
+$(function(){	
+	//侧边导航切换
+	$("#demo-list li").click(function(){
+		$("#demo-list li.active").removeClass("active")
+		$(this).addClass("active");
+	})	
+})	
+</script>
+</body>
+</html>
