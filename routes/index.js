@@ -4,7 +4,9 @@ var usr=require('dao/dbConnect');
 /* GET home page. */
 
 router.get('/', function(req, res) {
-	var login_num = req.query.login_num;
+	var login_num = 0;
+	if(req.query.login_num)
+		var login_num = req.query.login_num;
 	console.log("login_num is :"+login_num);
     if(req.cookies.islogin){                                                                           
         req.session.islogin=req.cookies.islogin;
@@ -31,7 +33,8 @@ router.route('/login')
         if(req.cookies.islogin){
             req.session.islogin=req.cookies.islogin;
         }
-        res.render('login', { 
+        res.render('index', { 
+			login_num: 3,
 			title: '首页', 
 			test:res.locals.islogin,
 			status1: 'active',status2: '',status3: '',status4: '',
