@@ -53,7 +53,7 @@ router.route('/login')
                     req.session.islogin=req.body.username;
                     res.locals.islogin=req.session.islogin;
                     res.cookie('islogin',res.locals.islogin,{maxAge:60000});
-                    res.redirect('/home');
+                    res.redirect('/');
                 }else
                 {
                     res.redirect('/login');
@@ -66,21 +66,6 @@ router.get('/logout', function(req, res) {
     res.clearCookie('islogin');
     req.session.destroy();
     res.redirect('/');
-});
-
-router.get('/home', function(req, res) {
-    if(req.session.islogin){
-        res.locals.islogin=req.session.islogin;
-    }
-    if(req.cookies.islogin){
-        req.session.islogin=req.cookies.islogin;
-    }
-   res.render('index', { 
-	title: '首页', 
-	test:res.locals.islogin,
-	status1: 'active',status2: '',status3: '',status4: '',
-	status5: '',status6: '',status7: '',status8: '',status9: ''
-	});
 });
 
 router.route('/reg')
