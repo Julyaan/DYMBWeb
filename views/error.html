@@ -2,50 +2,7 @@
 <html style="height:100%">
 <!--网页页头-->
 
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-<meta name="viewport" content="width=device-width, initial-scale=1" />  
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><%= title %> | 大医慢病研究院</title>
-<link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
-<link href="/css/reset.css" rel="stylesheet" type="text/css" />
-<link href="/css/base.css" rel="stylesheet" type="text/css" />
-<link href="/css/index.css" rel="stylesheet" type="text/css" />
-<link href="/css/home.css" rel="stylesheet" type="text/css" />
-
-</head>
-
-<body style="position:relative;min-height:100%;box-sizing:border-box;">
-<div id="header" class="header">
-    <div class="linear">
-	    <div class="top-p">
-		   <p class="fs12 t1">
-		      <a>加入收藏夹</a><span><a>设为首页</a></span>
-		   </p>
-		   <% if(locals.islogin) { %>
-		   <p class="fs12 t1" style="float:right">
-		     <i class="am-icon-user"></i>&nbsp;&nbsp;用户&nbsp;&nbsp;<a><%= test %></a>！<span><a href="/logout">注销</a></span>
-		   </p>
-		   <% } %>
-		</div>
-	</div>
-	<div class="header-logo">
-	    <div class="logo"><img src="image/logo_dymb.png"></div>
-	</div>
-	<div class="navbor">
-	  <nav id="navbor" class="fs16" >   
-	   <a class="<%= status1 %>" href="/">首页</a>
-	   <a class="<%= status2 %>" href="/introduce">简介</a>
-	   <a class="<%= status3 %>" href="/news" >新闻动态</a>
-	   <a class="<%= status4 %>" href="/research" >慢病研究</a>
-	   <a class="<%= status5 %>" href="blank_space.html" >研究基地</a>
-	   <a class="<%= status6 %>" href="/doctor_more" >专家资源</a>
-	   <a class="<%= status7 %>" href="blank_space.html" >人才培养</a>
-	   <a class="<%= status8 %>" href="blank_space.html" >学术交流</a>
-	   <a class="<%= status9 %>" href="blank_space.html" >企业文化</a>
-	  <nav>
-	</div>
-</div>	
+<%- include header %>
 <!--end-->
 
 <!--网页主体-->
@@ -53,7 +10,7 @@
     <div class="container beij">
 	    <div class="content_wz">
 		      <div class="inhaul cont_inh">
-			      <p><a href="#">首页</a></p>
+			      <p><a href="#"><%= error %></a></p>
 			  </div>
 		      <div class="new_b clearhid">
                 <div class="content_doc" style="text-align: center;">
@@ -72,39 +29,7 @@
 
 
 <!--网页页尾-->
-<div   style="width:100%; height:194px;position:absolute;bottom:0">
-	<div class="WB_footer clearhid">
-		<div class="footer_link clearfix">
-			<dl class="list">
-			   <dt class="fs14">研究研介绍</dt>
-			   <dd><a class="coll" href="#">成立背景</a></dd>
-			   <dd><a class="coll" href="#">核心资源</a></dd>
-			   <dd><a class="coll" href="#">发起院士</a></dd>
-			   <dd><a class="coll" href="#">机构设置</a></dd>
-			</dl>
-			 <dl class="list">
-			   <dt class="fs14">党建工作</dt>
-			   <dd><a class="coll" href="#">工作动态</a></dd>
-			   <dd><a class="coll" href="#">组织建设</a></dd>
-			   <dd><a class="coll" href="#">宣传工作</a></dd>
-			   <dd><a class="coll" href="#">精神文明</a></dd>
-			</dl>
-			 <dl class="list">
-			   <dt class="fs14">基地建设</dt>
-			   <dd><a class="coll" href="#">分院动态</a></dd>
-			   <dd><a class="coll" href="#">分院特色</a></dd>
-			   <dd><a class="coll" href="#">中心站点</a></dd>
-			   <dd><a class="coll" href="#">业绩成果</a></dd>
-			</dl>
-			<dl class="list list_tu">
-			   <dd><span><img src="image/logo-mini.png"></span></dd>
-			   <dd>咨询电话：010-68210236</dd>
-			   <dd><a class="coll" href="#">意见反馈</a>&nbsp;&nbsp;关于大医慢病研究院</dd> 
-			   <dd>◎2016 大医慢病研究院必读&nbsp;&nbsp;京ICP证030173号</dd>
-			</dl>
-		 </div>
-	</div>	 
-</div>
+<%- include footer %>
 <!--end-->
 
 </body>

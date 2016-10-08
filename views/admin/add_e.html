@@ -1,0 +1,95 @@
+
+    <div class="am-cf am-padding am-padding-bottom-0">
+      <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">新闻动态</strong> /
+        <small>发布新闻</small>
+      </div>
+    </div>
+    <hr>
+
+    <div class="am-tabs am-margin" data-am-tabs>
+      <ul class="am-tabs-nav am-nav am-nav-tabs">
+		<li class="am-active"><a href="#tab1">新建会议</a></li>
+      </ul>
+
+      <div class="am-tabs-bd">
+        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+		<div class="am-g am-margin-top">
+          <form class="am-form am-form-horizontal" data-am-validator id="releaseConference" action="../releaseConference" method="post">
+			
+            <div class="am-form-group ">
+              <label for="user-name" class="am-u-sm-4 am-u-md-2 am-form-label">会议名称</label>
+              <div class="am-u-sm-8 am-u-md-10">
+                <input class="am-input-sm" type="text" id="user-name" name="title" value="" style = "width:50%" placeholder="输入会议名称">         
+              </div>
+            </div>
+
+            <div class="am-form-group	">
+              <label for="user-email" class="am-u-sm-4 am-u-md-2 am-form-label">组织人员</label>
+              <div class="am-u-sm-8 am-u-md-10">
+                <input class="am-input-sm" type="text" id="user-email" name="docname" value="" style = "width:50%" placeholder="输入组织者的名字">
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-phone" class="am-u-sm-4 am-u-md-2  am-form-label">会议内容</label>
+              <div class="am-u-sm-8 am-u-md-10">
+                <textarea class="am-input-sm" rows="5"  style = "width:50%" type="text" id="user-phone" name = "content"  placeholder="输入会议的内容"></textarea>
+              </div>
+            </div>
+			
+			<div class="am-form-group am-form-inline">
+              <label for="num" class="am-u-sm-4 am-u-md-2 am-form-label">参会人数</label>
+              <div class="am-u-sm-8 am-u-md-10">
+				<div class="am-form-group ">					
+					<input class="am-form-field am-input-sm" type="number" id="num" name="num"   value=""placeholder="会议总人数">
+				</div>
+			  </div>
+            </div>
+			
+            <div class="am-form-group am-form-inline">
+              <label for="deadline" class="am-u-sm-4 am-u-md-2 am-form-label">报名截止时间</label>
+              <div class="am-u-sm-8 am-u-md-10 am-form-inline  ">
+				<div class="am-form-group am-form-icon">
+					<i class="am-icon-calendar"></i>
+					<input id="deadline" name="deadline" type="text" class="am-form-field am-input-sm" placeholder="截止时间" data-am-datepicker readonly required />
+				</div>
+			  </div>
+            </div>
+			
+			<div class="am-form-group am-form-inline">
+              <label for="deadline" class="am-u-sm-4 am-u-md-2 am-form-label">会议开始时间</label>
+              <div class="am-u-sm-8 am-u-md-10 am-form-inline  ">
+				<div class="am-form-group am-form-icon">
+					<i class="am-icon-calendar"></i>
+					<input id="starttime" name="starttime" type="text" class="am-form-field am-input-sm" placeholder="截止时间" data-am-datepicker readonly required />
+				</div>
+			  </div>
+            </div>
+
+			<div class="am-form-group">
+				<label for="m-pic" class="am-u-sm-4 am-u-md-2  am-form-label">上传图片</label>
+                    <div class="am-u-sm-8 am-u-md-10 ">
+                      <input type="file" id="m-pic" name="image">
+                      <p class="am-form-help">请选择要上传的会议图片...</p>                  
+                    </div>
+            </div>
+			
+			<div class="am-form-group am-form-inline">
+              <label for="fabu" class="am-u-sm-4 am-u-md-2 am-form-label"> </label>
+              <div class="am-u-sm-8 am-u-md-10 am-form-inline  ">
+				<div class="am-form-group ">
+					<input id="fabu"type="submit" class="am-btn am-btn-primary am-btn-default" value = "发布会议">
+				</div>
+			  </div>
+            </div>
+			
+		  </form>
+	   <span id="msg"></span>
+		</div>
+
+    </div>
+
+
+      </div>
+    </div>

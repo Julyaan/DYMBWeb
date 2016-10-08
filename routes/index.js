@@ -62,8 +62,14 @@ router.route('/login')
         });
     });
 
+
 router.get('/logout', function(req, res) {
     res.clearCookie('islogin');
+    req.session.destroy();
+    res.redirect('/');
+});
+router.get('/logoutAdm', function(req, res) {
+    res.clearCookie('admin');
     req.session.destroy();
     res.redirect('/');
 });
@@ -324,4 +330,91 @@ router.get('/doctor_info', function (req, res, next) {
 		
 	});
 });
+
+//
+//管理员登陆
+router.route('/admin')
+    .get(function(req, res) {
+        if(req.session.admin){
+            res.locals.admin=req.session.admin;
+        }
+
+        if(req.cookies.admin){
+            req.session.admin=req.cookies.admin;
+        }
+		var hint = '';
+		if(req.query.hint==1)
+			hint = '用户名或密码错误，请重试';
+		if(req.query.hint==2)
+			hint = '暂无权限访问，请先登录！';
+        res.render('admin', { 
+			title: '管理员登录', 
+			test:res.locals.islogin,
+			hint:hint,
+			status1: 'active',status2: '',status3: '',status4: '',
+			status5: '',status6: '',status7: '',status8: '',status9: ''
+			});
+    })
+    .post(function(req, res) {
+        client=usr.connect();
+        result=null;
+        usr.selectAdm(client,req.body.username, function (result) {
+			console.log("login:"+result);
+            if(result[0]===undefined){
+				console.log("failed: username is not exist");
+				res.redirect('/admin?hint=1');
+            }else{
+                if(result[0].password===req.body.password){
+                    req.session.admin=req.body.username;
+                    res.locals.admin=req.session.admin;
+                    res.cookie('admin',res.locals.admin,{maxAge:60000});
+                    res.redirect('/admin-index');
+                }else
+                {
+                    res.redirect('/admin?hint=1');
+                }
+               }
+        });
+    });
+//管理员主页
+router.get('/admin-index', function (req, res, next) {
+	if(req.session.admin){
+        res.locals.admin=req.session.admin;
+    }
+    if(req.cookies.admin){
+        req.session.admin=req.cookies.admin;
+    }
+	console.log('hello');
+	if(res.locals.admin){
+		res.render('admin/admin-index', {
+				title: '后台管理系统',
+				username: res.locals.admin
+			});
+		}
+	else{
+		 res.redirect('/admin?hint=2');
+	}
+});
+//管理页面路由 配合angularJS路由
+router.get('/admin_home', function (req, res, next) {
+	console.log("123");
+	res.render('admin/home', {
+			
+		});
+});
+
+router.get('/admin_add_news', function (req, res, next) {
+	console.log("456");
+		res.render('admin/add_news', {
+			
+		});
+});
+
+router.get('/admin_add_e', function (req, res, next) {
+	console.log("456");
+		res.render('admin/add_e', {
+			
+		});
+});
+	
 module.exports = router;

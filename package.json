@@ -11,10 +11,11 @@
     "debug": "~2.2.0",
     "ejs": "^2.5.2",
     "express": "~4.13.1",
+    "express-session": "latest",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
+    "mysql": "latest",
     "serve-favicon": "~2.3.0",
-	"mysql":"latest",
-    "express-session":"latest"
+    "ueditor": "^1.1.4"
   }
 }
