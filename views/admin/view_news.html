@@ -1,0 +1,116 @@
+    <div class="am-cf am-padding am-padding-bottom-0">
+      <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">新闻动态</strong> /
+        <small>查看新闻</small>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="am-tabs am-margin" data-am-tabs>
+		<ul class="am-tabs-nav am-nav am-nav-tabs">
+			<li class="am-active"><a href="#tab1">待发布</a></li>
+			<li><a href="#tab2">已发布</a></li>     
+		</ul>
+
+		<div class="am-tabs-bd">
+			<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+				 <div class="am-g">
+					<div class="am-u-sm-12">
+         
+						<table class="am-table am-table-striped am-table-hover table-main">
+						  <thead>
+						  <tr>
+							<th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">类别</th><th class="table-author am-hide-sm-only">来源</th><th class="table-date am-hide-sm-only">修改日期</th><th class="table-set">操作</th>
+						  </tr>
+						  </thead>
+						  <tbody>
+						  <tr ng-repeat="x in articles">
+							<td><input type="checkbox" /></td>
+							<td>{{ $index + 1 }}</td>
+							<td><a href="#/news_detail/{{$index}}">{{x.title}}</a></td>
+							<td>{{x.sort}}</td>
+							<td>{{x.source}}</td>
+							<td>{{x.date}}</td>
+							<td>
+							  <div class="am-btn-toolbar">
+								<div class="am-btn-group am-btn-group-xs">
+								  <button class="am-btn am-btn-default am-btn-xs am-text-secondary" ng-click="go('#/news_edit/'+$index+'/')"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+								  <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"   ng-click="go('#/news_detail/'+$index+'/')"><span class="am-icon-eye"></span> 预览</button>
+								  <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-send-o"></span> 发布</button>
+								</div>
+							  </div>
+							</td>
+						  </tr>
+							
+						  </tbody>
+						</table>
+						<div class="am-cf">
+						  共 {{articleNum}}条记录
+						  <div class="am-fr">
+							<ul class="am-pagination">
+							  <li class="am-disabled"><a href="">«</a></li>
+							  <li class="am-active"><a href="">1</a></li>
+							   <li><a href="">»</a></li>
+							</ul>
+						  </div>
+						</div>
+            
+            
+         
+        </div>
+		 </div>	
+			</div>
+			<div class="am-tab-panel am-fade" id="tab2">
+             <br><br><br><br>
+		  
+			</div>
+		</div>
+		
+		
+	</div>
+	
+	<!-- ----modal 框---- -->
+	<div class="am-popup" id="my-popup" style="height:164px;width:500px;margin-left:-250px;margin-top:-82px;">
+		<div class="am-popup-inner" style="padding-top:58px">
+			<div class="am-popup-hd" style="height:58px;padding:5px">
+				<h4 class="am-popup-title"><span class="am-icon-md am-icon-btn am-success am-icon-check-circle"></span>&nbsp;文章提交成功，将在审核后发布！</h4>
+			</div> 
+			<div class="am-popup-bd am-text-center" style="height:60px" id="num"></div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">立即审核</span>
+			</div>
+		</div>
+	</div>
+<!-- <script src="assets/js/jquery.min.js"></script> -->
+<script src="assets/js/amazeui.min.js"></script>
+<script type="text/javascript">
+	
+	
+	//设置提交成功的提示弹窗
+	var clearFlag = 0;
+	var count = 3;//设置3秒后自动消失
+	var autoClose = function(){
+		if(count>0){
+			$("#num").html(count + "秒后自动前往审核页面");
+			count--;
+		}else if(count<=0){
+			window.clearInterval(clearFlag); 
+			$("#num").html("...");
+		    //$("#my-popup").fadeOut("slow");
+			count = 3;
+		    $("#my-popup").modal('close');
+		}
+	}
+	
+	$('#my-popup').on('close.modal.amui', function(){
+	window.location.href =	"#/view_news";
+	});
+	$('#articleForm').submit(function(){ 
+		//alert(decodeURIComponent($(this).serializeArray())); 
+		$('#my-popup').modal('open');	
+		clearFlag = self.setInterval("autoClose()",1000);//每过一秒调用一次autoClose方法
+		return false; 
+	});
+	
+</script>

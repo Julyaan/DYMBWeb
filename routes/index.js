@@ -404,12 +404,32 @@ router.get('/admin_home', function (req, res, next) {
 });
 
 router.get('/admin_add_news', function (req, res, next) {
-	console.log("456");
+	console.log("admin_add_news");
 		res.render('admin/add_news', {
 			
 		});
 });
 
+router.get('/admin_view_news', function (req, res, next) {
+	console.log("admin_view_news");
+		res.render('admin/view_news', {
+			
+		});
+});
+//编辑新闻
+router.get('/admin_edit_news', function (req, res, next) {
+	console.log("admin_edit_news");
+		res.render('admin/edit_news', {
+			
+		});
+});
+//新闻详情
+/* router.get('/news_datail', function (req, res, next) {
+	console.log("get the details of the news");
+		res.render('admin/news_datail', {
+			
+		});
+}); */
 router.get('/admin_add_e', function (req, res, next) {
 	console.log("456");
 		res.render('admin/add_e', {

@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
-<body ng-app='routingDemoApp'>
+<body ng-app='routingDemoApp' ng-controller='AppController'>
 <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
   以获得更好的体验！</p>
@@ -56,7 +56,10 @@
           <a class="am-cf" data-am-collapse="{target: '#collapse-nav1'}"><span class="am-icon-send"></span> 新闻动态 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
           <ul class="am-list am-collapse admin-sidebar-sub " id="collapse-nav1">
             <li><a href="#/add_news"><span class="am-icon-send-o"></span> 新建文章</a></li>
-            <li><a href="#/view_news"><span class="am-icon-th"></span> 查看文章</a></li>
+            <li><a href="#/view_news"><span class="am-icon-th"></span> 查看文章
+				<span ng-hide="count == 0"class="am-badge am-badge-secondary am-margin-right am-fr">{{ $root.count }}</span>
+				
+			</a></li>
           </ul>
         </li>
 		 <li class="admin-parent">
@@ -82,7 +85,7 @@
         </li>
 		<li><a href="admin-table.html"><span class="am-icon-pencil-square-o"></span> 留言管理</a></li>
         <li><a href="admin-table.html"><span class="am-icon-table"></span> 其他</a></li>
-        <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+        <li><a href="/logoutAdm"><span class="am-icon-sign-out"></span> 注销</a></li>
       </ul>
 
       <div class="am-panel am-panel-default admin-sidebar-panel">
@@ -126,23 +129,149 @@
 <script src="assets/js/app.js"></script>
 <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
 <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+<script src="http://cdn.bootcss.com/angular-sanitize/1.5.8/angular-sanitize.min.js"></script>
 <script>
-	angular.module('routingDemoApp',['ngRoute'])
+	angular.module('routingDemoApp',['ngRoute', 'ngSanitize'])
+	.controller('AppController',function ($scope,$rootScope,myFactory) 
+				{
+				$rootScope.count= 0
+				})
+	.controller('NewsController',function ($scope,$rootScope,myFactory) 
+				{
+				$scope.sorts ={
+					"慢病头条":"慢病头条",
+					"政策咨询":"政策咨询",
+					"学术论文":"学术论文",
+					"慢病咨询":"慢病咨询"
+					};
+				
+				$scope.getData = function(){
+					$rootScope.count = $rootScope.count + 1;
+					$scope.date = $("#date").val();
+					var html = ue.getContent();
+					//$scope.content = $("#contenCarrier").html();
+					$scope.content = html;
+					myFactory.setter($scope.title,$scope.source,$scope.date,$scope.sort,$scope.content);
+					console.log("it's:"+$scope.content);
+					}
+				})
+	.controller('NewsViewController',function ($scope,$rootScope,myFactory) 
+				{
+				var getObj = myFactory.getter();
+				$scope.articles = getObj.articles;
+				$scope.articleNum = $scope.articles.length;
+				$scope.go = function(url){
+					console.log("url:"+url);
+					//$location.path(url);
+					window.location.href =	url;
+					}
+				})
+	.controller('NewsDtlController',function($scope,$routeParams,myFactory)
+				{
+				var getObj = myFactory.getter();
+				var articles = getObj.articles;
+				$scope.essay = articles[$routeParams.id];
+				$scope.showData = function(){
+					console.log("hello:"+$scope.essay);
+					
+					}
+				})
+	.controller('NewsEditController',function($scope,$routeParams,myFactory)
+				{
+				$scope.sorts2 =["慢病头条","政策咨询","学术论文","慢病咨询"];
+				var getObj = myFactory.getter();
+				var articles = getObj.articles;
+				$scope.essay = articles[$routeParams.id];
+				$scope.showDatas = function(){
+					console.log("hello:"+$scope.essay);
+					
+					}
+				})
+	.factory('myFactory', function () {   
+		//定义参数对象
+		var myObject = {};
+		myObject.articles = [];
+		var _setter = function (title,source,date,sort,content) {
+			var data ={};
+			data.title = title;
+			data.source = source;
+			data.date = date;
+			data.sort = sort;
+			data.content = content;
+		    myObject.articles.push(data);     
+		   //console.log(myObject.articles.length);
+		};
+
+		var _getter = function () {
+			return myObject;
+		};
+
+		// Public APIs
+		// 在controller中通过调setter()和getter()方法可实现提交或获取参数的功能
+		return {
+			setter: _setter,
+			getter: _getter
+		};
+	})
+
 	.config(['$routeProvider', function($routeProvider){
 		$routeProvider
-		.when('/',{templateUrl:'admin_home'})
-		.when('/add_news',{templateUrl:'admin_add_news'})
-		.when('/view_news',{template:'02这是查看新闻页面'})
+		.when('/',{templateUrl:'admin_home',controller: 'AppController'})
+		.when('/add_news',{
+				templateUrl:'admin_add_news',
+				controller: 'NewsController'
+			})
+		.when('/view_news',{
+				templateUrl:'admin_view_news',
+				controller: 'NewsViewController'
+			})
+		.when('/news_detail/:id',{
+				templateUrl:'news_datail.html',
+				controller: 'NewsDtlController'
+			})
+		.when('/news_edit/:id',{
+				templateUrl:'admin_edit_news',
+				controller: 'NewsEditController'
+			})
 		.when('/add_e',{templateUrl:'admin_add_e'})
 		.when('/view_e',{template:'04这是查看新专家页面'})
 		.when('/add_r',{template:'05这是发布研究动态页面'})
 		.when('/view_r',{template:'06这是查看研究动态页面'})
 		.when('/add_base',{template:'07这是发布基地页面'})
 		.when('/view_base',{template:'08这是查看基地页面'})
+
 		.otherwise({redirectTo:'/'});
+		
 	}]);
-</script>
 	
+	
+</script>
+<!-- ---查看新闻详情----- -->	
+<script type="text/ng-template" id = 'news_datail.html'>
+  
+	<div class="am-cf am-padding am-padding-bottom-0">
+		<div class="am-fl am-cf">
+			<strong class="am-text-primary am-text-lg">新闻动态</strong><small>&nbsp;>>&nbsp;<a href="#/view_news">待发布</a>&nbsp;>>&nbsp;文章详情</small>
+		</div>
+	</div>
+
+    <hr>
+	<div style =" width: 750px; margin: auto;"class="am-tabs am-margin" data-am-tabs>
+		<ul class="am-tabs-nav am-nav am-nav-tabs">
+
+		</ul>
+
+	
+	<p align="center"><b>{{essay.title}}</b></p>
+	<p><b>来源：</b>{{essay.source}}</p>
+	<p><b>日期：</b>{{essay.date}}</p>
+	<p><b>分类：</b>{{essay.sort}}</p>
+	<hr>
+	<div ng-bind-html="essay.content"></div> 
+	
+	</div> 
+ 
+</script>
 
 </body>
 </html>

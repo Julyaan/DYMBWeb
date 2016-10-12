@@ -1,7 +1,6 @@
     <div class="am-cf am-padding am-padding-bottom-0">
       <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">新闻管理</strong> /
-        <small>发布新闻</small>
+			<strong class="am-text-primary am-text-lg">新闻动态</strong> /<small><a href="#/view_news">待发布</a>&nbsp;>>&nbsp;编辑文章</small>
       </div>
     </div>
     <hr>
@@ -23,7 +22,7 @@
               </div>
               <div class="am-u-sm-8 am-u-md-4">
 				
-                <input type="text" class="am-input-sm" ng-model="title" id="title" name="title"/>
+                <input type="text" class="am-input-sm" ng-model="essay.title" id="title" name="title"/>
               </div>
               <div class="am-hide-sm-only am-u-md-6"></div>
             </div>
@@ -33,7 +32,7 @@
                 	新闻来源
               </div>
               <div class="am-u-sm-8 am-u-md-4">   
-				 <input type="text" class="am-input-sm" ng-model="source" id="source" placeholder="请输入新闻来源/作者" name="source"/>
+				 <input type="text" class="am-input-sm" ng-model="essay.source" id="source"  name="source"/>
               </div>
               <div class="am-hide-sm-only  am-u-md-6"></div>
             </div> 
@@ -43,7 +42,7 @@
                 	发稿日期
               </div>
               <div class="am-u-sm-8 am-u-md-4">   
-				 <input type="text" class="am-input-sm"  id="date" placeholder="2016-01-01" data-am-datepicker readonly required name="date"/>
+				 <input type="text" class="am-input-sm"  id="date" ng-model="essay.date" name="date"/>
               </div>
               <div class="am-hide-sm-only  am-u-md-6"></div>
             </div> 
@@ -54,7 +53,7 @@
               </div>
               <div class="am-u-sm-8 am-u-md-4">   
 				<div class="am-form-group am-form-group-sm">
-					<select class="am-form-field"  ng-model="sort" ng-options=" x for (x, y) in sorts">
+					<select class="am-form-field"  ng-model="essay.sort" ng-options=" x for x in sorts2">
 						<option selected="selected" class="" value="">请选择一个分类</option>
 					</select>
 					<span class="am-form-caret"></span>
@@ -69,11 +68,11 @@
                	    新闻内容
               </div>
               <div class="am-u-sm-12 am-u-md-10">
-              	<textarea id="editor"  style="width:600px;height:600px;" placeholder="请使用富文本编辑插件" name="content" rows="80"></textarea>
+              	<textarea id="editor"  ng-model="essay.content" style="width:600px;height:600px;" placeholder="请使用富文本编辑插件" name="content" rows="80"></textarea>
               </div>
             </div>
 			<div class="am-margin">
-					<input id="fabu" type="submit"  ng-click="getData()" class="am-btn am-btn-primary am-btn-default" value = "发布新闻">
+					<input id="fabu" type="button"  ng-click="showDatas()" class="am-btn am-btn-primary am-btn-default" value = "发布新闻">
 				</div>
 			
           </form>
@@ -108,9 +107,14 @@
 	<script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
 	//实例化编辑器
-    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    /*建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     var ue = UE.getEditor('editor');
 
+	var appElement = document.querySelector('[ng-controller=NewsController]');//获得绑定controllerdom节点
+	
+
+	
+	
 	
     function isFocus(e){
         alert(UE.getEditor('editor').isFocus());
@@ -237,11 +241,11 @@
 	$('#my-popup').on('close.modal.amui', function(){
 	window.location.href =	"#/view_news";
 	});
-	$('#articleForm').submit(function(){ 
+	$('#articleForm2').submit(function(){ 
 		//alert(decodeURIComponent($(this).serializeArray())); 
 		$('#my-popup').modal('open');	
 		clearFlag = self.setInterval("autoClose()",1000);//每过一秒调用一次autoClose方法
 		return false; 
 	});
-	
+	*/
 </script>
