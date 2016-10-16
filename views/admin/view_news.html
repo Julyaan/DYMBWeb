@@ -15,7 +15,7 @@
 
 		<div class="am-tabs-bd">
 			<div class="am-tab-panel am-fade am-in am-active" id="tab1">
-				 <div class="am-g">
+				<div class="am-g">
 					<div class="am-u-sm-12">
          
 						<table class="am-table am-table-striped am-table-hover table-main">
@@ -37,7 +37,7 @@
 								<div class="am-btn-group am-btn-group-xs">
 								  <button class="am-btn am-btn-default am-btn-xs am-text-secondary" ng-click="go('#/news_edit/'+$index+'/')"><span class="am-icon-pencil-square-o"></span> 编辑</button>
 								  <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"   ng-click="go('#/news_detail/'+$index+'/')"><span class="am-icon-eye"></span> 预览</button>
-								  <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-send-o"></span> 发布</button>
+								  <button class="am-btn am-btn-default am-btn-xs am-text-danger" ng-click="send($index)"><span class="am-icon-send-o"></span> 发布</button>
 								</div>
 							  </div>
 							</td>
@@ -54,15 +54,85 @@
 							   <li><a href="">»</a></li>
 							</ul>
 						  </div>
-						</div>
-            
-            
-         
-        </div>
-		 </div>	
+						</div>             
+					</div>
+				</div>	
 			</div>
 			<div class="am-tab-panel am-fade" id="tab2">
-             <br><br><br><br>
+            	<div class="am-g">
+					<div class="am-u-sm-12 am-u-md-6">
+					  <div class="am-btn-toolbar">
+						<div class="am-btn-group am-btn-group-xs">
+						  <button type="button" ng-click="go('#/add_news')" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+						  <button type="button" ng-click="refresh()" class="am-btn am-btn-default"><span class="am-icon-refresh"></span> 刷新</button>
+						</div>
+					  </div>
+					</div>
+					<div class="am-u-sm-12 am-u-md-2">
+					  <div class="am-form-group">
+						<select id="selectlines"data-am-selected="{btnSize: 'sm'}">
+						  <option value="10">排序方式</option>
+						  <option value="5">5行</option>
+						  <option value="10">10行</option>
+						  <option value="15">15行</option>
+						  <option value="20">20行</option>
+						  <option value="null">全部</option>    
+						</select>
+					  </div>
+					</div>
+					<div class="am-u-sm-12 am-u-md-3">
+					  <div class="am-input-group am-input-group-sm">
+						<input type="text" id="searchbox1"class="am-form-field">
+					  <span class="am-input-group-btn">
+						<button class="am-btn am-btn-default" type="button">搜索</button>
+					  </span>
+					  </div>
+					</div>
+				</div>
+					
+				
+				<div class="am-g">
+					<div class="am-u-sm-12">
+         
+						<table class="am-table am-table-striped am-table-hover table-main">
+						  <thead>
+						  <tr>
+							<th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">类别</th><th class="table-author am-hide-sm-only">来源</th><th class="table-date am-hide-sm-only">发布日期</th><th class="table-set">操作</th>
+						  </tr>
+						  </thead>
+						  <tbody>
+						  <tr ng-repeat="x in newsList">
+							<td><input type="checkbox" /></td>
+							<td>{{ $index + 1 }}</td>
+							<td><a href="">{{x.news_title}}</a></td>
+							<td>{{x.news_sort}}</td>
+							<td>{{x.news_source}}</td>
+							<td>{{x.news_date}}</td>
+							<td>
+							  <div class="am-btn-toolbar">
+								<div class="am-btn-group am-btn-group-xs">
+								  <button class="am-btn am-btn-default am-btn-xs am-text-secondary" ng-click="go('#/news_edit/'+$index+'/')"><span class="am-icon-pencil-square-o"></span> 修改</button>
+								  <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"   ng-click="go('#/news_detail/'+$index+'/')"><span class="am-icon-eye"></span> 查看</button>
+								  <button class="am-btn am-btn-default am-btn-xs am-text-danger" ng-click="send($index)"><span class="am-icon-trash-o"></span> 删除</button>
+								</div>
+							  </div>
+							</td>
+						  </tr>
+							
+						  </tbody>
+						</table>
+						<div class="am-cf">
+						  共 {{newsNum}}条记录
+						  <div class="am-fr">
+							<ul class="am-pagination">
+							  <li class="am-disabled"><a href="">«</a></li>
+							  <li class="am-active"><a href="">1</a></li>
+							   <li><a href="">»</a></li>
+							</ul>
+						  </div>
+						</div>             
+					</div>
+				</div>	
 		  
 			</div>
 		</div>

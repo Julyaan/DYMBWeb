@@ -91,6 +91,7 @@ router.route('/reg')
               res.redirect('/reg');
         });
     });
+
 	
 /* 页面跳转 */
 router.get('/introduce', function (req, res, next) {
@@ -435,6 +436,39 @@ router.get('/admin_add_e', function (req, res, next) {
 		res.render('admin/add_e', {
 			
 		});
+});
+//向服务器添加新闻
+router.post('/admin_send_news',function(req,res,next){
+	console.log("admin_send_news:"+req.body);
+	client = usr.connect();
+	usr.insertNews(client,req.body, function(err) {
+		console.log("err from router:"+err);
+		res.json(err)		   	
+	});
+});
+//获取所有新闻列表
+router.get('/getnews', function (req, res, next) {
+	client=usr.connect();
+	result = null;
+	usr.selectNewsList(client,function (result) {		
+		for(var o in result){
+			switch(result[o].news_sort)
+			{
+				case 'sort1':
+					result[o].news_sort = '慢病头条';break;
+				case 'sort2':
+					result[o].news_sort = '政策咨询';break;
+				case 'sort3':
+					result[o].news_sort = '学术论文';break;
+				case 'sort4':
+					result[o].news_sort = '慢病咨询';break;
+			}
+			var time = JSON.stringify(result[0].news_date);	
+			result[o].news_date = time.substring(1,11);
+		}
+		console.log(result);
+		res.json(result);	
+	});
 });
 	
 module.exports = router;
