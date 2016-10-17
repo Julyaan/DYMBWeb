@@ -424,13 +424,48 @@ router.get('/admin_edit_news', function (req, res, next) {
 			
 		});
 });
-//新闻详情
-/* router.get('/news_datail', function (req, res, next) {
-	console.log("get the details of the news");
-		res.render('admin/news_datail', {
+
+//从服务器获取新闻详情
+router.get('/getnewsinfo', function (req, res, next) {
+	console.log("get the details of the news from DB");
+		var id = req.query.id;
+		client=usr.connect();
+		result = null;
+		usr.selectNews(client,id, function (result) {
+			var time = JSON.stringify(result[0].news_date);
+			console.log("the news is:"+time.substring(0,11));
+			time = time.substring(1,11);
+			result[0].news_date = time;
+			switch(result[0].news_sort)
+			{
+				case 'sort1':
+					result[0].news_sort = '慢病头条';break;
+				case 'sort2':
+					result[0].news_sort = '政策咨询';break;
+				case 'sort3':
+					result[0].news_sort = '学术论文';break;
+				case 'sort4':
+					result[0].news_sort = '慢病咨询';break;
+			}
+			res.json(result);
+		});
+		
+	});
+//修改服务器处新闻
+router.get('/admin_update_news', function (req, res, next) {
+	console.log("admin_edit_news");
+		res.render('admin/update_news', {
 			
 		});
-}); */
+});
+router.post('/admin_update_news_send',function(req,res,next){//发送修改好的新闻
+	console.log("admin_update_news_send:"+req.body);
+	client = usr.connect();
+	usr.UpdateNews(client,req.body, function(err) {
+		console.log("err from router:"+err);
+		res.json(err)		   	
+	});
+});
 router.get('/admin_add_e', function (req, res, next) {
 	console.log("456");
 		res.render('admin/add_e', {
@@ -463,7 +498,7 @@ router.get('/getnews', function (req, res, next) {
 				case 'sort4':
 					result[o].news_sort = '慢病咨询';break;
 			}
-			var time = JSON.stringify(result[0].news_date);	
+			var time = JSON.stringify(result[o].news_date);	
 			result[o].news_date = time.substring(1,11);
 		}
 		console.log(result);

@@ -165,6 +165,7 @@
 <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
 <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
 <script src="http://cdn.bootcss.com/angular-sanitize/1.5.8/angular-sanitize.min.js"></script>
+
 <script>
 	//设置提交成功的提示弹窗
 	var clearNum = 0;
@@ -332,6 +333,64 @@
 					
 					}
 				})
+	.controller('NewsGetController',function($scope,$http,$routeParams){
+				$http.get("/getnewsinfo?id="+$routeParams.id).success(function (response) {
+					$scope.essay = response[0];
+					});
+		
+				})
+	.controller('NewsUpdateController',function($scope,$http,$rootScope,$routeParams){
+				html_temp = null;
+				$scope.sorts2 =["慢病头条","政策咨询","学术论文","慢病咨询"];
+				$http.get("/getnewsinfo?id="+$routeParams.id).success(function (response) {
+					$scope.essay = response[0];
+					html_temp = $scope.essay.news_body;
+					});
+				$scope.sendNewsUpdated=function(){
+					var html = ue2.getContent();
+					$scope.essay.news_body = html;
+					var formData = $scope.essay
+					$rootScope.titleAlert = formData.news_title;
+					$rootScope.sortAlert = formData.news_sort;				
+					$('#my-confirm').modal({
+						relatedTarget: formData,
+						onConfirm: function(options) {
+							switch(this.relatedTarget.sort)
+							{
+								case '慢病头条':
+									this.relatedTarget.sort = 'sort1';break;
+								case '政策咨询':
+									this.relatedTarget.sort = 'sort2';break;
+								case '学术论文':
+									this.relatedTarget.sort = 'sort3';break;
+								case '慢病咨询':
+									this.relatedTarget.sort = 'sort4';break;
+							}
+							//console.log(formData);
+							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
+							$http({
+								method  : 'POST',
+								url     : '/admin_update_news_send',
+								data    : JSON.stringify(this.relatedTarget),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									if(data == null){
+										$('#my-popup-success').modal('open');	
+										clearNum = self.setInterval("autoClose_s()",1000);
+										}
+									else{
+										$rootScope.err =data;
+										$('#my-popup-fail').modal('open');	
+										}
+									
+								});
+							}
+						});
+					}
+				})
 	.factory('myFactory', function () {   
 		//定义参数对象
 		var myObject = {};
@@ -378,6 +437,14 @@
 				templateUrl:'admin_edit_news',
 				controller: 'NewsEditController'
 			})
+		.when('/news_get/:id',{
+				templateUrl:'admin_get_news.html',
+				controller: 'NewsGetController'
+			})
+		.when('/news_update/:id',{
+				templateUrl:'admin_update_news',
+				controller: 'NewsUpdateController'
+			})
 		.when('/add_e',{templateUrl:'admin_add_e'})
 		.when('/view_e',{template:'04这是查看新专家页面'})
 		.when('/add_r',{template:'05这是发布研究动态页面'})
@@ -389,8 +456,7 @@
 		
 	}]);
 	
-	
-	
+
 
 	
 </script>
@@ -418,6 +484,29 @@
 		<div class="am-margin">
 			<input  type="button"  ng-click="send(this_num)" class="am-btn am-btn-primary am-btn-default" value = "发布新闻">
 		</div> 
+	</div>
+</script>
+<!-- ---从服务器获取新闻内容----- -->	
+<script type="text/ng-template" id = 'admin_get_news.html'>
+  
+	<div class="am-cf am-padding am-padding-bottom-0">
+		<div class="am-fl am-cf">
+			<strong class="am-text-primary am-text-lg">新闻动态</strong><small>&nbsp;>>&nbsp;<a href="#/view_news">已发布</a>&nbsp;>>&nbsp;文章详情</small>
+		</div>
+	</div>
+
+    <hr>
+	<div style =" width: 750px; margin: auto;"class="am-tabs am-margin" data-am-tabs>
+		<ul class="am-tabs-nav am-nav am-nav-tabs">
+		</ul>
+	
+		<p align="center"><b>{{essay.news_title}}</b></p>
+		<p><b>来源：</b>{{essay.news_source}}</p>
+		<p><b>日期：</b>{{essay.news_date}}</p>
+		<p><b>分类：</b>{{essay.news_sort}}</p>
+		<hr>
+		<div ng-bind-html="essay.news_body"></div> 
+		<br><br>
 	</div>
 </script>
 

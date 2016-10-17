@@ -69,20 +69,19 @@
 					  </div>
 					</div>
 					<div class="am-u-sm-12 am-u-md-2">
-					  <div class="am-form-group">
-						<select id="selectlines"data-am-selected="{btnSize: 'sm'}">
-						  <option value="10">排序方式</option>
-						  <option value="5">5行</option>
-						  <option value="10">10行</option>
-						  <option value="15">15行</option>
-						  <option value="20">20行</option>
-						  <option value="null">全部</option>    
+					  <div class="am-form-group am-group-sm">
+						<select class="am-form-field" ng-model="order">
+						  <option value="">排序方式</option>
+						  <option value="''">发布日期</option>
+						  <option value="news_sort">新闻类别</option>
+						  <option value="news_date">新闻日期</option>
+						  <option value="news_title">新闻标题</option>
 						</select>
 					  </div>
 					</div>
 					<div class="am-u-sm-12 am-u-md-3">
 					  <div class="am-input-group am-input-group-sm">
-						<input type="text" id="searchbox1"class="am-form-field">
+						<input type="text" ng-model="keywords" class="am-form-field">
 					  <span class="am-input-group-btn">
 						<button class="am-btn am-btn-default" type="button">搜索</button>
 					  </span>
@@ -97,22 +96,22 @@
 						<table class="am-table am-table-striped am-table-hover table-main">
 						  <thead>
 						  <tr>
-							<th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">类别</th><th class="table-author am-hide-sm-only">来源</th><th class="table-date am-hide-sm-only">发布日期</th><th class="table-set">操作</th>
+							<th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">类别</th><th class="table-author am-hide-sm-only">来源</th><th class="table-date am-hide-sm-only">新闻日期</th><th class="table-set">操作</th>
 						  </tr>
 						  </thead>
 						  <tbody>
-						  <tr ng-repeat="x in newsList">
+						  <tr ng-repeat="x in newsList | filter:keywords | orderBy:order:true">
 							<td><input type="checkbox" /></td>
 							<td>{{ $index + 1 }}</td>
-							<td><a href="">{{x.news_title}}</a></td>
+							<td><a href="#/news_get/{{x.id}}">{{x.news_title}}</a></td>
 							<td>{{x.news_sort}}</td>
 							<td>{{x.news_source}}</td>
 							<td>{{x.news_date}}</td>
 							<td>
 							  <div class="am-btn-toolbar">
 								<div class="am-btn-group am-btn-group-xs">
-								  <button class="am-btn am-btn-default am-btn-xs am-text-secondary" ng-click="go('#/news_edit/'+$index+'/')"><span class="am-icon-pencil-square-o"></span> 修改</button>
-								  <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"   ng-click="go('#/news_detail/'+$index+'/')"><span class="am-icon-eye"></span> 查看</button>
+								  <button class="am-btn am-btn-default am-btn-xs am-text-secondary" ng-click="go('#/news_update/'+x.id+'/')"><span class="am-icon-pencil-square-o"></span> 修改</button>
+								  <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"   ng-click="go('#/news_get/'+x.id+'/')"><span class="am-icon-eye"></span> 查看</button>
 								  <button class="am-btn am-btn-default am-btn-xs am-text-danger" ng-click="send($index)"><span class="am-icon-trash-o"></span> 删除</button>
 								</div>
 							  </div>
