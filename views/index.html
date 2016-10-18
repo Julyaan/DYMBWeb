@@ -47,54 +47,36 @@
 				        <li>慢病咨询</li>
 				     </ul>
 			        <div class="contxt" id="con_1">
-				         <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=1">抚余市工作调研<span>2016-09-09</span></a></div>
-						 </div>
+					<%	for(var i = 0;i < 6 ; i++) { %>
+							<%	if(list[0][i]){ %>
 						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=2">河北大学附属医院慢病研讨会<span>2016-07-08</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=<%= list[0][i].id %>"><%= list[0][i].news_title %><span><%= list[0][i].news_date %></span></a></div>
 						 </div>
-						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=3">民政十三五规划公布 医养结合型养老机构成发展重点<span>2016-06-17</span></a></div>
-						 </div>
-						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=4">全国卫生与健康大会19日至20日在京召开<span>2016-06-09</span></a></div>
-						 </div>
-						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=5">健康中国2030规划纲要审议通过<span>2016-05-19</span></a></div>
-						 </div>
-						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=6">健康管理|全生命周期 自始至终防慢病<span>2016-05-09</span></a></div>
-						 </div>
+						<%	}} %>
 				     </div>
 					 <div class="contxt hidden" id="con_2">
-				         <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=1001">大病及慢性病医保政策新调整<span>2016-09-15</span></a></div>
-						 </div>
+						<%	for(var i = 0;i < 6 ; i++) { %>
+							<%	if(list[1][i]){ %>
 						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=1002">十三五规划建议：降低大病慢性病医疗费用<span>2016-09-10</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=<%= list[1][i].id %>"><%= list[1][i].news_title %><span><%= list[1][i].news_date %></span></a></div>
 						 </div>
-						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=1003">中国慢性病防治工作规划(2012—2015年)<span>2016-09-10</span></a></div>
-						 </div>
+						<%	}} %>
 				     </div>
 					<div class="contxt hidden" id="con_3">
-				         <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=2001">浅谈慢病防治工作的几点体会<span>2016-09-15</span></a></div>
-						 </div>
+				        <%	for(var i = 0;i < 6 ; i++) { %>
+							<%	if(list[2][i]){ %>
 						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=2002">慢性非传染性疾病防治现状及策略思考<span>2016-09-10</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=<%= list[2][i].id %>"><%= list[2][i].news_title %><span><%= list[2][i].news_date %></span></a></div>
 						 </div>
+						<%	}} %>
 				     </div>
 					 <div class="contxt hidden" id="con_4">
-				         <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=3001">2020年中国健康要达到95个目标<span>2016-09-15</span></a></div>
-						 </div>
+				         <%	for(var i = 0;i < 6 ; i++) { %>
+							<%	if(list[3][i]){ %>
 						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=3002">慢病的合理预防<span>2016-09-10</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=<%= list[3][i].id %>"><%= list[3][i].news_title %><span><%= list[3][i].news_date %></span></a></div>
 						 </div>
-						 <div class="summary fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=3002">心脑血管疾病的预防方法<span>2016-09-10</span></a></div>
-						 </div>
+							<%	}} %>
 				     </div>
 			     </div>
 				 <!--公告-->

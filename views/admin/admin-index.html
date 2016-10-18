@@ -128,6 +128,17 @@
 			</div>
 		</div>
 	</div>
+	<div class="am-popup" id="my-popup-success2" style="height:164px;width:500px;margin-left:-250px;margin-top:-82px;">
+		<div class="am-popup-inner" style="padding-top:58px">
+			<div class="am-popup-hd" style="height:58px;padding:5px">
+				<h4 class="am-popup-title"><span class="am-icon-md am-icon-btn am-success am-icon-check-circle"></span>&nbsp;文章删除成功！</h4>
+			</div> 
+			<div class="am-popup-bd am-text-center" style="height:60px">点击“确定”返回操作界面</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
 	<div class="am-popup" id="my-popup-fail" style="height:164px;width:500px;margin-left:-250px;margin-top:-82px;">
 	  <div class="am-popup-inner" style="padding-top:58px">
 		<div class="am-popup-hd" style="height:58px;padding:5px">
@@ -144,6 +155,18 @@
 		<div class="am-modal-hd">文章发布提醒</div>
 		<div class="am-modal-bd">
 		  您确定要将文章《{{$root.titleAlert}}》发布到栏目“{{$root.sortAlert}}”吗？
+		</div>
+		<div class="am-modal-footer">
+		  <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+		  <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+		</div>
+	  </div>
+	</div>
+	<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm-delete">
+	  <div class="am-modal-dialog">
+		<div class="am-modal-hd">文章删除提醒</div>
+		<div class="am-modal-bd">
+		  您确定要从数据库中删除这篇文章吗？删除后将不可恢复
 		</div>
 		<div class="am-modal-footer">
 		  <span class="am-modal-btn" data-am-modal-cancel>取消</span>
@@ -184,7 +207,9 @@
 	$('#my-popup-success').on('close.modal.amui', function(){
 	window.location.href =	"#/view_news";
 	});
-	
+	$('#my-popup-success2').on('close.modal.amui', function(){
+	window.location.href =	"#/view_news";
+	});
 	angular.module('routingDemoApp',['ngRoute', 'ngSanitize'])
 	.controller('AppController',function ($scope,$rootScope,myFactory) 
 				{
@@ -272,7 +297,35 @@
 						$scope.newsList = response;
 						$scope.newsNum = $scope.newsList.length;
 						});
-					}	
+					}
+				$scope.delete = function(num){
+					var formData = {"id":num};
+					$('#my-confirm-delete').modal({
+						relatedTarget: formData,
+						onConfirm: function(options) {
+							//console.log(formData);
+							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
+							$http({
+								method  : 'POST',
+								url     : '/dangerwaytodothis',
+								data    : JSON.stringify(this.relatedTarget),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									if(data == null){					
+										$('#my-popup-success2').modal('open');	
+										}
+									else{
+										$rootScope.err =data;
+										$('#my-popup-fail').modal('open');	
+										}
+									
+								});
+							}
+						});
+					}
 				})
 	.controller('NewsDtlController',function($scope,$routeParams,myFactory)
 				{

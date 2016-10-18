@@ -14,13 +14,53 @@ router.get('/', function(req, res) {
 	if(req.session.islogin){
 		res.locals.islogin=req.session.islogin;
 	}
-  res.render('index', { 
-	title: '首页', 
-	test:res.locals.islogin,
-	login_num:login_num,
-	status1: 'active',status2: '',status3: '',status4: '',
-	status5: '',status6: '',status7: '',status8: '',status9: ''
-	});
+	client=usr.connect();
+	
+	function selectLN(sort,i){
+		usr.selectLatest(client,sort[j],function (result) {
+		for(var o in result){
+			var time = JSON.stringify(result[o].news_date);
+			time = time.substring(1,11);
+			result[o].news_date = time;
+			}
+		console.log("its done:"+sort[j]);
+		j++;
+		
+		donext(result,i,function(i){
+			console.log("i:"+i);
+			i++;
+			if(i<4)
+				selectLN(sort,i)
+			else{
+				//rs = JSON.stringify(rs);
+				//console.log(result);
+				res.render('index', { 
+					title: '首页', 
+					test:res.locals.islogin,
+					login_num:login_num,
+					list:rs,				
+					status1: 'active',status2: '',status3: '',status4: '',
+					status5: '',status6: '',status7: '',status8: '',status9: ''
+					});
+				}
+			});
+		});
+	}
+	
+	function donext(res,i,callback)
+	{	
+		rs[i]= res;
+		console.log(i+":"+JSON.stringify(rs[i]));
+		callback(i);
+		
+	}
+	
+	var sort = ["sort1","sort2","sort3","sort4"];
+	var rs = [];
+	var i = 0;
+	var j = 0;
+	selectLN(sort,i);
+	
 });
 
 
@@ -457,6 +497,16 @@ router.get('/admin_update_news', function (req, res, next) {
 		res.render('admin/update_news', {
 			
 		});
+});
+//删除服务器处新闻
+router.post('/dangerwaytodothis',function(req,res,next){
+	var id = req.body.id;
+	console.log("id=:"+id);
+	client =usr.connect();
+	usr.deleteNews(client,id,function(err){
+		console.log("err from router when deleting:"+err);
+		res.json(err);
+	});
 });
 router.post('/admin_update_news_send',function(req,res,next){//发送修改好的新闻
 	console.log("admin_update_news_send:"+req.body);
