@@ -450,6 +450,12 @@ router.get('/admin_add_news', function (req, res, next) {
 			
 		});
 });
+router.get('/admin_add_r', function (req, res, next) {
+	console.log("admin_add_r");
+		res.render('admin/add_r', {
+			
+		});
+});
 
 router.get('/admin_view_news', function (req, res, next) {
 	console.log("admin_view_news");
@@ -504,6 +510,17 @@ router.post('/dangerwaytodothis',function(req,res,next){
 	console.log("id=:"+id);
 	client =usr.connect();
 	usr.deleteNews(client,id,function(err){
+		console.log("err from router when deleting:"+err);
+		res.json(err);
+	});
+});
+//修改新闻发布状态
+router.post('/dangerwaytodothis2',function(req,res,next){
+	var status = req.body.status;
+	var id = req.body.id;
+	console.log("status=:"+status);
+	client =usr.connect();
+	usr.SetNewsStatus(client,id,status,function(err){
 		console.log("err from router when deleting:"+err);
 		res.json(err);
 	});

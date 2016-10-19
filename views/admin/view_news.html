@@ -96,7 +96,7 @@
 						<table class="am-table am-table-striped am-table-hover table-main">
 						  <thead>
 						  <tr>
-							<th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">类别</th><th class="table-author am-hide-sm-only">来源</th><th class="table-date am-hide-sm-only">新闻日期</th><th class="table-set">操作</th>
+							<th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">类别</th><th class="table-author am-hide-sm-only">来源</th><th class="table-date am-hide-sm-only">新闻日期</th><th class="table-set">操作</th><th class="table-set">在线/撤回</th>
 						  </tr>
 						  </thead>
 						  <tbody>
@@ -115,6 +115,24 @@
 								  <button class="am-btn am-btn-default am-btn-xs am-text-danger" ng-click="delete(x.id)"><span class="am-icon-trash-o"></span> 删除</button>
 								</div>
 							  </div>
+							</td>
+							<td>
+								<div ng-if="x.status== 'on' " class="am-btn-group am-btn-group-xs doc-js-btn-1" data-am-button>
+								  <label class="am-btn am-btn-default">
+									<input type="radio" name="options"  checked> on
+								  </label>
+								  <label class="am-btn am-btn-default" ng-click="changeStatus(x.status,x.id)">
+									<input type="radio" name="options"  >off
+								  </label>
+								</div>
+								<div ng-if="x.status== 'off' " class="am-btn-group am-btn-group-xs doc-js-btn-1" data-am-button>
+								  <label class="am-btn am-btn-default"  ng-click="changeStatus(x.status,x.id)">
+									<input type="radio" name="options2"> on
+								  </label>
+								  <label class="am-btn am-btn-default">
+									<input type="radio" name="options2"  checked>off
+								  </label>
+								</div>
 							</td>
 						  </tr>
 							

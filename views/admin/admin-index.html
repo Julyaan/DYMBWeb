@@ -73,7 +73,9 @@
           <a class="am-cf" data-am-collapse="{target: '#collapse-nav3'}"><span class="am-icon-pencil-square"></span> 慢病研究 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
           <ul class="am-list am-collapse admin-sidebar-sub " id="collapse-nav3">
             <li><a href="#/add_r"><span class="am-icon-file-o"></span> 新建</a></li>
-            <li><a href="#/view_r"><span class="am-icon-file-text-o"></span> 查看</a></li>
+            <li><a href="#/view_r"><span class="am-icon-file-text-o"></span> 查看
+				<span ng-hide="count2 == 0"class="am-badge am-badge-secondary am-margin-right am-fr">{{ $root.count2 }}</span>
+			</a></li>
           </ul>
         </li>
 		<li class="admin-parent">
@@ -213,7 +215,8 @@
 	angular.module('routingDemoApp',['ngRoute', 'ngSanitize'])
 	.controller('AppController',function ($scope,$rootScope,myFactory) 
 				{
-				$rootScope.count= 0
+				$rootScope.count= 0;
+				$rootScope.count2= 0
 				})
 	.controller('NewsController',function ($scope,$rootScope,myFactory) 
 				{
@@ -232,6 +235,25 @@
 					$scope.content = html;
 					myFactory.setter($scope.title,$scope.source,$scope.date,$scope.sort,$scope.content);
 					console.log("add news:it's:"+$scope.content);
+					}
+				})
+	.controller('ResAddController',function ($scope,$rootScope,myFactory)  //添加慢病研究
+				{
+				$scope.sorts ={
+					"心脑血管病研究中心":"心脑血管病研究中心",
+					"肿瘤研究中心":"肿瘤研究中心",
+					"慢阻肺研究中心":"慢阻肺研究中心",
+					"医养结合中心":"医养结合中心",
+					"示范基地":"示范基地",
+					};
+				$scope.getData = function(){
+					$rootScope.count2 = $rootScope.count2 + 1;
+					$scope.date = $("#date_r").val();
+					var html = ue_r.getContent();
+					//$scope.content = $("#contenCarrier").html();
+					$scope.content = html;
+					myFactory.setter_r($scope.title,$scope.source,$scope.date,$scope.sort,$scope.content);
+					console.log("add research:it's:"+$scope.content);
 					}
 				})
 	.controller('NewsViewController',function ($scope,$rootScope,$http,myFactory) 
@@ -325,6 +347,35 @@
 								});
 							}
 						});
+					}
+				$scope.changeStatus = function(num,id){
+					console.log("changeStatus:"+num);
+					if(num == 'on'){
+						var formData = {"id":id,"status":"off"};
+						$http({
+								method  : 'POST',
+								url     : '/dangerwaytodothis2',
+								data    : JSON.stringify(formData),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									$scope.refresh();
+										});
+						}else{	var formData = {"id":id,"status":"on"};
+								$http({
+									method  : 'POST',
+									url     : '/dangerwaytodothis2',
+									data    :  JSON.stringify(formData),  
+									contentType: "application/json; charset=utf-8",
+									dataType: "json", 
+									}).error(function(err){
+										alert("failed:"+err)
+									}).success(function(data){
+										$scope.refresh();
+										});
+								}
 					}
 				})
 	.controller('NewsDtlController',function($scope,$routeParams,myFactory)
@@ -448,6 +499,9 @@
 		//定义参数对象
 		var myObject = {};
 		myObject.articles = [];
+		//慢病研究部分
+		var myObject_r = {};
+		myObject_r.articles = [];
 		var _setter = function (title,source,date,sort,content) {
 			var data ={};
 			data.title = title;
@@ -458,16 +512,31 @@
 		    myObject.articles.push(data);     
 		   //console.log(myObject.articles.length);
 		};
+		var _setter_r = function (title,source,date,sort,content) {
+			var data ={};
+			data.title = title;
+			data.source = source;
+			data.date = date;
+			data.sort = sort;
+			data.content = content;
+		    myObject_r.articles.push(data);     
+		   //console.log(myObject.articles.length);
+		};
 
 		var _getter = function () {
 			return myObject;
+		};
+		var _getter_r = function () {
+			return myObject_r;
 		};
 
 		// Public APIs
 		// 在controller中通过调setter()和getter()方法可实现提交或获取参数的功能
 		return {
 			setter: _setter,
-			getter: _getter
+			setter_r:_setter_r,
+			getter: _getter,
+			getter_r: _getter_r
 		};
 	})
 
@@ -500,7 +569,10 @@
 			})
 		.when('/add_e',{templateUrl:'admin_add_e'})
 		.when('/view_e',{template:'04这是查看新专家页面'})
-		.when('/add_r',{template:'05这是发布研究动态页面'})
+		.when('/add_r',{
+				templateUrl:'admin_add_r',
+				controller: 'ResAddController'
+			})
 		.when('/view_r',{template:'06这是查看研究动态页面'})
 		.when('/add_base',{template:'07这是发布基地页面'})
 		.when('/view_base',{template:'08这是查看基地页面'})

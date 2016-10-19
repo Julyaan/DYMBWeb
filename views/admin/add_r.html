@@ -1,0 +1,248 @@
+    <div class="am-cf am-padding am-padding-bottom-0">
+      <div class="am-fl am-cf">
+        <strong class="am-text-primary am-text-lg">慢病研究</strong> /
+        <small>发布文章</small>
+      </div>
+    </div>
+    <hr>
+
+    <div class="am-tabs am-margin" data-am-tabs>
+      <ul class="am-tabs-nav am-nav am-nav-tabs">
+		
+      </ul>
+
+      <div class="am-tabs-bd">
+        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+		<div class="am-g am-margin-top">
+         
+		   <form class="am-form" id="articleForm_r"  action="">
+           
+			<div class="am-g am-margin-top">
+              <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                	文章标题
+              </div>
+              <div class="am-u-sm-8 am-u-md-4">
+				
+                <input type="text" class="am-input-sm" ng-model="title" id="title_r" name="title"/>
+              </div>
+              <div class="am-hide-sm-only am-u-md-6"></div>
+            </div>
+
+            <div class="am-g am-margin-top">
+              <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                	文章来源
+              </div>
+              <div class="am-u-sm-8 am-u-md-4">   
+				 <input type="text" class="am-input-sm" ng-model="source" id="source_r" placeholder="请输入新闻来源/作者" name="source"/>
+              </div>
+              <div class="am-hide-sm-only  am-u-md-6"></div>
+            </div> 
+			
+			<div class="am-g am-margin-top">
+              <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                	发稿日期
+              </div>
+              <div class="am-u-sm-8 am-u-md-4">   
+				 <input type="text" class="am-input-sm"  id="date_r" placeholder="2016-01-01" data-am-datepicker readonly required name="date"/>
+              </div>
+              <div class="am-hide-sm-only  am-u-md-6"></div>
+            </div> 
+
+			<div class="am-g am-margin-top">
+              <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                	文章类别
+              </div>
+              <div class="am-u-sm-8 am-u-md-4">   
+				<div class="am-form-group am-form-group-sm">
+					<select class="am-form-field"  ng-model="sort" ng-options=" x for (x, y) in sorts">
+						<option selected="selected" class="" value="">请选择一个分类</option>
+					</select>
+					<span class="am-form-caret"></span>
+				</div>
+              </div>
+              <div class="am-hide-sm-only  am-u-md-6"></div>
+            </div> 
+            
+
+            <div class="am-g am-margin-top-sm">
+              <div class="am-u-sm-12 am-u-md-2 am-text-right admin-form-text">
+               	    文章内容
+              </div>
+              <div class="am-u-sm-12 am-u-md-10">
+              	<textarea id="editor_r"  style="width:600px;height:600px;" placeholder="请使用富文本编辑插件" name="content" rows="80"></textarea>
+              </div>
+            </div>
+			<div class="am-margin">
+					<input  type="submit"  ng-click="getData()" class="am-btn am-btn-primary am-btn-default" value = "发布新闻">
+				</div>
+			
+          </form>
+				
+		</div>
+		
+		
+				
+			  
+           
+		</div>
+
+
+      </div>
+    </div>
+
+	<div class="am-popup" id="my-popup_r" style="height:164px;width:500px;margin-left:-250px;margin-top:-82px;">
+		<div class="am-popup-inner" style="padding-top:58px">
+			<div class="am-popup-hd" style="height:58px;padding:5px">
+				<h4 class="am-popup-title"><span class="am-icon-md am-icon-btn am-success am-icon-check-circle"></span>&nbsp;文章提交成功，将在审核后发布！</h4>
+			</div> 
+			<div class="am-popup-bd am-text-center" style="height:60px" id="num_r"></div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">立即审核</span>
+			</div>
+		</div>
+	</div>
+<!-- 	<script src="assets/js/jquery.min.js"></script> -->
+	<script src="assets/js/amazeui.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.js"> </script>
+	<script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript">
+	//实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue_r = UE.getEditor('editor');
+
+	
+    function isFocus(e){
+        alert(UE.getEditor('editor').isFocus());
+        UE.dom.domUtils.preventDefault(e)
+    }
+    function setblur(e){
+        UE.getEditor('editor').blur();
+        UE.dom.domUtils.preventDefault(e)
+    }
+    function insertHtml() {
+        var value = prompt('插入html代码', '');
+        UE.getEditor('editor').execCommand('insertHtml', value)
+    }
+    function createEditor() {
+        enableBtn();
+        UE.getEditor('editor');
+    }
+    function getAllHtml() {
+        alert(UE.getEditor('editor').getAllHtml())
+    }
+    function getContent() {
+        var arr = [];
+        arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getContent());
+        alert(arr.join("\n"));
+    }
+    function getPlainTxt() {
+        var arr = [];
+        arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getPlainTxt());
+        alert(arr.join('\n'))
+    }
+    function setContent(isAppendTo) {
+        var arr = [];
+        arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
+        UE.getEditor('editor').setContent('欢迎使用ueditor', isAppendTo);
+        alert(arr.join("\n"));
+    }
+    function setDisabled() {
+        UE.getEditor('editor').setDisabled('fullscreen');
+        disableBtn("enable");
+    }
+
+    function setEnabled() {
+        UE.getEditor('editor').setEnabled();
+        enableBtn();
+    }
+
+    function getText() {
+        //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
+        var range = UE.getEditor('editor').selection.getRange();
+        range.select();
+        var txt = UE.getEditor('editor').selection.getText();
+        alert(txt)
+    }
+
+    function getContentTxt() {
+        var arr = [];
+        arr.push("使用editor.getContentTxt()方法可以获得编辑器的纯文本内容");
+        arr.push("编辑器的纯文本内容为：");
+        arr.push(UE.getEditor('editor').getContentTxt());
+        alert(arr.join("\n"));
+    }
+    function hasContent() {
+        var arr = [];
+        arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
+        arr.push("判断结果为：");
+        arr.push(UE.getEditor('editor').hasContents());
+        alert(arr.join("\n"));
+    }
+    function setFocus() {
+        UE.getEditor('editor').focus();
+    }
+    function deleteEditor() {
+        disableBtn();
+        UE.getEditor('editor').destroy();
+    }
+    function disableBtn(str) {
+        var div = document.getElementById('btns');
+        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+        for (var i = 0, btn; btn = btns[i++];) {
+            if (btn.id == str) {
+                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+            } else {
+                btn.setAttribute("disabled", "true");
+            }
+        }
+    }
+    function enableBtn() {
+        var div = document.getElementById('btns');
+        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+        for (var i = 0, btn; btn = btns[i++];) {
+            UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+        }
+    }
+
+    function getLocalData () {
+        alert(UE.getEditor('editor').execCommand( "getlocaldata" ));
+    }
+
+    function clearLocalData () {
+        UE.getEditor('editor').execCommand( "clearlocaldata" );
+        alert("已清空草稿箱")
+    }
+	
+	//设置提交成功的提示弹窗
+	var clearFlag_r = 0;
+	var count_r = 3;//设置3秒后自动消失
+	var autoClose_r = function(){
+		if(count_r>0){
+			$("#num_r").html(count_r + "秒后自动前往审核页面");
+			count_r--;
+		}else if(count_r<=0){
+			window.clearInterval(clearFlag_r); 
+			$("#num_r").html("...");
+		    //$("#my-popup").fadeOut("slow");
+			count_r = 3;
+		    $("#my-popup_r").modal('close');
+			clearFlag_r = 0;
+		}
+	}
+	
+	$('#my-popup_r').on('close.modal.amui', function(){
+	window.location.href =	"#/view_r";
+	});
+	$('#articleForm_r').submit(function(){ 
+		//alert(decodeURIComponent($(this).serializeArray())); 
+		$('#my-popup_r').modal('open');	
+		clearFlag_r = self.setInterval("autoClose_r()",1000);//每过一秒调用一次autoClose方法
+		return false; 
+	});
+	
+</script>
