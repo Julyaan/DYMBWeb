@@ -12,6 +12,8 @@
     "ejs": "^2.5.2",
     "express": "~4.13.1",
     "express-session": "latest",
+    "formidable": "^1.0.17",
+    "fs": "0.0.1-security",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "mysql": "latest",
