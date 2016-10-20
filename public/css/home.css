@@ -221,7 +221,7 @@
 }
 .summary .t-icon {
 	margin: 0;
-	background: url(../image/p-icon-1.png) no-repeat left center;
+	background: url(../image/p-icon.png) no-repeat left center;
 	line-height: 34px;
 	text-align: left;
 }
@@ -250,7 +250,7 @@
 .menu .circle{
    width: 6px;
    height: 6px;
-   background: #999;
+   background: #94c536;
    float:left;
    margin-top: 14px;
    -moz-border-radius: 50px;      /* Gecko browsers */

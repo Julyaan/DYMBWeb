@@ -89,6 +89,10 @@
     text-align: center;
 }
 .new_con p span{ color: #0b84bb;}
+.new_con .doc_img{
+    float: left;
+	margin: 0 20px 0 20px;
+}
 
 /*doctor info*/
 .content_doc{
