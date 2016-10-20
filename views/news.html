@@ -31,25 +31,11 @@
 			  </div>
 		      <div class="new_b clearhid">
 			       <div class="contxt">
+				       <% for(var i in list[0]){ %>
 				         <div class="summary sum_list fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=1">抚余市工作调研<span>2016-09-09</span></a></div>
+						    <div class="t-icon"><a class="pp" href="/news_details?id=<%= list[0][i].id %>"><%= list[0][i].news_title %><span><%= list[0][i].news_date %></span></a></div>
 						 </div>
-						 <div class="summary sum_list fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=2">河北大学附属医院慢病研讨会<span>2016-07-04</span></a></div>
-						 </div>
-				         <div class="summary sum_list fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=3">民政十三五规划公布 医养结合型养老机构成发展重点<span>2016-06-17</span></a></div>
-						 </div>
-						 <div class="summary sum_list fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=4">全国卫生与健康大会19日至20日在京召开<span>2016-06-09</span></a></div>
-						 </div>
-						 <div class="summary sum_list fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=5">健康中国2030规划纲要审议通过<span>2016-05-19</span></a></div>
-						 </div>
-						 <div class="summary sum_list fs14">
-						    <div class="t-icon"><a class="pp" href="/news_details?id=6">健康管理|全生命周期 自始至终防慢病<span>2016-05-09</span></a></div>
-						 </div>
-				         
+				        <% } %>
 				    </div>
 					 <br/><br/><br/>
 			  </div>

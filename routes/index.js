@@ -210,14 +210,50 @@ router.get('/news', function (req, res, next) {
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    res.render('news', {
-        title: '新闻动态',
-		status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
-		test:res.locals.islogin,
-        /* user: req.session.user,
-        success: req.flash('success').toString(),
-        error: req.flash('error').toString() */
-    });
+		client=usr.connect();
+	
+	function selectLN(sort,i){
+		usr.selectLatest(client,sort[j],function (result) {
+		for(var o in result){
+			var time = JSON.stringify(result[o].news_date);
+			time = time.substring(1,11);
+			result[o].news_date = time;
+			}
+		console.log("its done:"+sort[j]);
+		j++;
+		
+		donext(result,i,function(i){
+			console.log("i:"+i);
+			i++;
+			if(i<4)
+				selectLN(sort,i)
+			else{
+				req.session.list = rs;
+				res.render('news', {
+					title: '新闻动态',
+					status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
+					test:res.locals.islogin,
+					list: req.session.list
+					});
+				}
+			});
+		});
+	}
+	
+	function donext(res,i,callback)
+	{	
+		rs[i]= res;
+		console.log(i+":"+JSON.stringify(rs[i]));
+		callback(i);
+		
+	}
+	
+	var sort = ["sort1","sort2","sort3","sort4"];
+	var rs = [];
+	var i = 0;
+	var j = 0;
+	selectLN(sort,i);
+    
 });
 router.get('/news02', function (req, res, next) {
 	if(req.session.islogin){
@@ -230,6 +266,7 @@ router.get('/news02', function (req, res, next) {
         title: '政策咨询',
 		status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
 		test:res.locals.islogin,
+		list: req.session.list
     });
 });
 router.get('/news03', function (req, res, next) {
@@ -243,6 +280,7 @@ router.get('/news03', function (req, res, next) {
         title: '学术论文',
 		status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
 		test:res.locals.islogin,
+		list: req.session.list
     });
 });
 router.get('/news04', function (req, res, next) {
@@ -256,6 +294,7 @@ router.get('/news04', function (req, res, next) {
         title: '慢病咨询',
 		status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
 		test:res.locals.islogin,
+		list: req.session.list
     });
 });
 router.get('/news_details', function (req, res, next) {
@@ -355,6 +394,7 @@ router.get('/research04', function (req, res, next) {
         test:res.locals.islogin,
     });
 });
+
 router.get('/research_details', function (req, res, next) {
 	if(req.session.islogin){
         res.locals.islogin=req.session.islogin;
@@ -428,7 +468,20 @@ router.get('/doctor_info', function (req, res, next) {
 	});
 });
 
-//
+//学术交流
+router.get('/learning', function (req, res, next) {
+	if(req.session.islogin){
+        res.locals.islogin=req.session.islogin;
+    }
+    if(req.cookies.islogin){
+        req.session.islogin=req.cookies.islogin;
+    }
+    res.render('learning', {
+        title: '学术交流',
+		status1: '',status2: '',status3: '',status4: '',status5: '',status6: '',status7: '',status8: 'active',status9: '',
+        test:res.locals.islogin,
+    });
+});
 //管理员登陆
 router.route('/admin')
     .get(function(req, res) {

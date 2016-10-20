@@ -31,12 +31,11 @@
 		</div>
 		<div class="new_b clearhid">
 		   <div class="contxt">
-				 <div class="summary sum_list fs14">
-					<div class="t-icon"><a class="pp" href="/news_details?id=2001">浅谈慢病防治工作的几点体会<span>2016-09-05</span></a></div>
-				 </div>
-				 <div class="summary sum_list fs14">
-					<div class="t-icon"><a class="pp" href="/news_details?id=2002">慢性非传染性疾病防治现状及策略思考<span>2016-09-10</span></a></div>
-				 </div>	 
+				 <% for(var i in list[2]){ %>
+				         <div class="summary sum_list fs14">
+						    <div class="t-icon"><a class="pp" href="/news_details?id=<%= list[2][i].id %>"><%= list[2][i].news_title %><span><%= list[2][i].news_date %></span></a></div>
+						 </div>
+				        <% } %>	 
 			</div>
 			<br/><br/><br/>
 		</div>

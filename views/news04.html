@@ -31,15 +31,11 @@
 		</div>
 		<div class="new_b clearhid">
 		   <div class="contxt">
-				 <div class="summary sum_list fs14">
-					<div class="t-icon"><a class="pp" href="/news_details?id=3001">2020年中国健康要达到95个目标<span>2016-09-05</span></a></div>
-				 </div>
-				 <div class="summary sum_list fs14">
-					<div class="t-icon"><a class="pp" href="/news_details?id=3002">慢病的合理预防<span>2016-09-10</span></a></div>
-				 </div>
-				 <div class="summary sum_list fs14">
-					<div class="t-icon"><a class="pp" href="/news_details?id=3002">心脑血管疾病的预防方法<span>2016-09-10</span></a></div>
-				 </div>		 	 
+				 <% for(var i in list[3]){ %>
+				         <div class="summary sum_list fs14">
+						    <div class="t-icon"><a class="pp" href="/news_details?id=<%= list[3][i].id %>"><%= list[3][i].news_title %><span><%= list[3][i].news_date %></span></a></div>
+						 </div>
+				        <% } %>	 	 
 			</div>
 			<br/><br/><br/>
 		</div>
