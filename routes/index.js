@@ -10,7 +10,7 @@ router.get('/upload', function(req, res) {
 });
 
 router.post('/upload', function(req, res) {
-
+	res.locals.success = null;
   var form = new formidable.IncomingForm();   //创建上传表单
 	  form.encoding = 'utf-8';		//设置编辑
 	  form.uploadDir = 'public' + AVATAR_UPLOAD_FOLDER;	 //设置上传目录
@@ -572,10 +572,23 @@ router.get('/admin_view_news', function (req, res, next) {
 			
 		});
 });
+router.get('/admin_view_r', function (req, res, next) {
+	console.log("admin_view_r");
+		res.render('admin/view_r', {
+			
+		});
+});
 //编辑新闻
 router.get('/admin_edit_news', function (req, res, next) {
 	console.log("admin_edit_news");
 		res.render('admin/edit_news', {
+			
+		});
+});
+//编辑res
+router.get('/admin_edit_res', function (req, res, next) {
+	console.log("admin_edit_res");
+		res.render('admin/edit_res', {
 			
 		});
 });
@@ -606,10 +619,32 @@ router.get('/getnewsinfo', function (req, res, next) {
 		});
 		
 	});
+//从服务器获取res详情
+router.get('/getresinfo', function (req, res, next) {
+	console.log("get the details of the res from DB");
+		var id = req.query.id;
+		client=usr.connect();
+		result = null;
+		usr.selectRes(client,id, function (result) {
+			var time = JSON.stringify(result[0].news_date);
+			console.log("the news is:"+time.substring(0,11));
+			time = time.substring(1,11);
+			result[0].news_date = time;
+			res.json(result);
+		});
+		
+	});
 //修改服务器处新闻
 router.get('/admin_update_news', function (req, res, next) {
 	console.log("admin_edit_news");
 		res.render('admin/update_news', {
+			
+		});
+});
+//修改服务器处res
+router.get('/admin_update_res', function (req, res, next) {
+	console.log("admin_update_res");
+		res.render('admin/update_res', {
 			
 		});
 });
@@ -619,6 +654,16 @@ router.post('/dangerwaytodothis',function(req,res,next){
 	console.log("id=:"+id);
 	client =usr.connect();
 	usr.deleteNews(client,id,function(err){
+		console.log("err from router when deleting:"+err);
+		res.json(err);
+	});
+});
+//删除服务器处res
+router.post('/dangerwaytodothis_r',function(req,res,next){
+	var id = req.body.id;
+	console.log("id=:"+id);
+	client =usr.connect();
+	usr.deleteRes(client,id,function(err){
 		console.log("err from router when deleting:"+err);
 		res.json(err);
 	});
@@ -634,10 +679,29 @@ router.post('/dangerwaytodothis2',function(req,res,next){
 		res.json(err);
 	});
 });
+//修改res发布状态
+router.post('/dangerwaytodothis2_r',function(req,res,next){
+	var status = req.body.status;
+	var id = req.body.id;
+	console.log("status=:"+status);
+	client =usr.connect();
+	usr.SetResStatus(client,id,status,function(err){
+		console.log("err from router when deleting:"+err);
+		res.json(err);
+	});
+});
 router.post('/admin_update_news_send',function(req,res,next){//发送修改好的新闻
 	console.log("admin_update_news_send:"+req.body);
 	client = usr.connect();
 	usr.UpdateNews(client,req.body, function(err) {
+		console.log("err from router:"+err);
+		res.json(err)		   	
+	});
+});
+router.post('/admin_update_res_send',function(req,res,next){//发送修改好的res
+	console.log("admin_update_res_send:"+req.body);
+	client = usr.connect();
+	usr.UpdateRes(client,req.body, function(err) {
 		console.log("err from router:"+err);
 		res.json(err)		   	
 	});
@@ -653,6 +717,15 @@ router.post('/admin_send_news',function(req,res,next){
 	console.log("admin_send_news:"+req.body);
 	client = usr.connect();
 	usr.insertNews(client,req.body, function(err) {
+		console.log("err from router:"+err);
+		res.json(err)		   	
+	});
+});
+//向服务器添加res
+router.post('/admin_send_res',function(req,res,next){
+	console.log("admin_send_res:"+req.body);
+	client = usr.connect();
+	usr.insertRes(client,req.body, function(err) {
 		console.log("err from router:"+err);
 		res.json(err)		   	
 	});
@@ -674,6 +747,19 @@ router.get('/getnews', function (req, res, next) {
 				case 'sort4':
 					result[o].news_sort = '慢病咨询';break;
 			}
+			var time = JSON.stringify(result[o].news_date);	
+			result[o].news_date = time.substring(1,11);
+		}
+		console.log(result);
+		res.json(result);	
+	});
+});
+//获取所有res列表
+router.get('/getres', function (req, res, next) {
+	client=usr.connect();
+	result = null;
+	usr.selectResList(client,function (result) {		
+		for(var o in result){
 			var time = JSON.stringify(result[o].news_date);	
 			result[o].news_date = time.substring(1,11);
 		}

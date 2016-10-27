@@ -14,6 +14,14 @@
   <meta name="apple-mobile-web-app-title" content="Amaze UI" />
   <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="assets/css/admin.css">
+  <style type="text/css">
+	.text-nowrap{
+		word-break:keep-all;             /* 不换行 */
+		white-space:nowrap;            /* 不换行 */
+		overflow:hidden;                  /* 内容超出宽度时隐藏超出部分的内容 */
+		text-overflow:ellipsis;            /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+		}
+  </style>
 </head>
 <body ng-app='routingDemoApp' ng-controller='AppController'>
 <!--[if lte IE 9]>
@@ -141,6 +149,28 @@
 			</div>
 		</div>
 	</div>
+	<div class="am-popup" id="my-popup-success-r" style="height:164px;width:500px;margin-left:-250px;margin-top:-82px;">
+		<div class="am-popup-inner" style="padding-top:58px">
+			<div class="am-popup-hd" style="height:58px;padding:5px">
+				<h4 class="am-popup-title"><span class="am-icon-md am-icon-btn am-success am-icon-check-circle"></span>&nbsp;文章已发送！</h4>
+			</div> 
+			<div class="am-popup-bd am-text-center" style="height:60px" id="num1-r"></div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
+	<div class="am-popup" id="my-popup-success2-r" style="height:164px;width:500px;margin-left:-250px;margin-top:-82px;">
+		<div class="am-popup-inner" style="padding-top:58px">
+			<div class="am-popup-hd" style="height:58px;padding:5px">
+				<h4 class="am-popup-title"><span class="am-icon-md am-icon-btn am-success am-icon-check-circle"></span>&nbsp;文章删除成功！</h4>
+			</div> 
+			<div class="am-popup-bd am-text-center" style="height:60px">点击“确定”返回操作界面</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
 	<div class="am-popup" id="my-popup-fail" style="height:164px;width:500px;margin-left:-250px;margin-top:-82px;">
 	  <div class="am-popup-inner" style="padding-top:58px">
 		<div class="am-popup-hd" style="height:58px;padding:5px">
@@ -206,11 +236,28 @@
 		    $("#my-popup-success").modal('close');
 		}
 	}
+	var autoClose_s_r = function(){
+		if(counts>0){
+			$("#num1-r").html(counts + "秒后自动关闭");
+			counts--;
+		}else if(counts<=0){
+			window.clearInterval(clearNum); 
+			$("#num1-r").html("...");
+			counts = 3;
+		    $("#my-popup-success-r").modal('close');
+		}
+	}
 	$('#my-popup-success').on('close.modal.amui', function(){
 	window.location.href =	"#/view_news";
 	});
 	$('#my-popup-success2').on('close.modal.amui', function(){
 	window.location.href =	"#/view_news";
+	});
+	$('#my-popup-success-r').on('close.modal.amui', function(){
+	window.location.href =	"#/view_r";
+	});
+	$('#my-popup-success2-r').on('close.modal.amui', function(){
+	window.location.href =	"#/view_r";
 	});
 	angular.module('routingDemoApp',['ngRoute', 'ngSanitize'])
 	.controller('AppController',function ($scope,$rootScope,myFactory) 
@@ -245,6 +292,7 @@
 					"慢阻肺研究中心":"慢阻肺研究中心",
 					"医养结合中心":"医养结合中心",
 					"示范基地":"示范基地",
+					"学术交流":"学术交流"
 					};
 				$scope.getData = function(){
 					$rootScope.count2 = $rootScope.count2 + 1;
@@ -338,6 +386,7 @@
 								}).success(function(data){
 									if(data == null){					
 										$('#my-popup-success2').modal('open');	
+										$scope.refresh();
 										}
 									else{
 										$rootScope.err =data;
@@ -378,9 +427,127 @@
 								}
 					}
 				})
+	.controller('ResViewController',function ($scope,$rootScope,$http,myFactory) 
+				{
+				var getObj = myFactory.getter_r();
+				$rootScope.articles_r = getObj.articles;
+				$scope.articleNum = $rootScope.articles_r.length;
+				$scope.go = function(url){
+					console.log("url:"+url);
+					//$location.path(url);
+					window.location.href =	url;
+					}
+				$rootScope.sendres = function(num){
+					var formData = $rootScope.articles_r[num];
+					$rootScope.titleAlert = formData.title;
+					$rootScope.sortAlert = formData.sort;
+					$('#my-confirm').modal({
+						relatedTarget: formData,
+						onConfirm: function(options) {
+							//console.log(formData);
+							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
+							$http({
+								method  : 'POST',
+								url     : '/admin_send_res',
+								data    : JSON.stringify(this.relatedTarget),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									if(data == null){
+										$rootScope.articles_r.splice(num,1);
+										$('#my-popup-success-r').modal('open');	
+										clearNum = self.setInterval("autoClose_s_r()",1000);
+										$rootScope.count2 = $rootScope.count2 - 1;}
+									else{
+										$rootScope.err =data;
+										$('#my-popup-fail').modal('open');	
+										}
+									
+								});
+							}
+						});
+					}		
+				$http.get("/getres").success(function (response) {
+					$scope.newsList = response;
+					$scope.newsNum = $scope.newsList.length;
+					});
+				$scope.refresh = function(){
+					$http.get("/getres").success(function (response) {
+						$scope.newsList = response;
+						$scope.newsNum = $scope.newsList.length;
+						});
+					}
+				$scope.delete = function(num){
+					var formData = {"id":num};
+					$('#my-confirm-delete').modal({
+						relatedTarget: formData,
+						onConfirm: function(options) {
+							//console.log(formData);
+							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
+							$http({
+								method  : 'POST',
+								url     : '/dangerwaytodothis_r',
+								data    : JSON.stringify(this.relatedTarget),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									if(data == null){					
+										$('#my-popup-success2-r').modal('open');	
+										$scope.refresh();
+										}
+									else{
+										$rootScope.err =data;
+										$('#my-popup-fail').modal('open');	
+										}
+									
+								});
+							}
+						});
+					}
+				$scope.changeStatus = function(num,id){
+					console.log("changeStatus:"+num);
+					if(num == 'on'){
+						var formData = {"id":id,"status":"off"};
+						$http({
+								method  : 'POST',
+								url     : '/dangerwaytodothis2_r',
+								data    : JSON.stringify(formData),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									$scope.refresh();
+										});
+						}else{	var formData = {"id":id,"status":"on"};
+								$http({
+									method  : 'POST',
+									url     : '/dangerwaytodothis2_r',
+									data    :  JSON.stringify(formData),  
+									contentType: "application/json; charset=utf-8",
+									dataType: "json", 
+									}).error(function(err){
+										alert("failed:"+err)
+									}).success(function(data){
+										$scope.refresh();
+										});
+								}
+					}
+				})
 	.controller('NewsDtlController',function($scope,$routeParams,myFactory)
 				{
 				var getObj = myFactory.getter();
+				var articles = getObj.articles;
+				$scope.essay = articles[$routeParams.id];
+				$scope.this_num = $routeParams.id
+				})
+	.controller('ResDtlController',function($scope,$routeParams,myFactory)
+				{
+				var getObj = myFactory.getter_r();
 				var articles = getObj.articles;
 				$scope.essay = articles[$routeParams.id];
 				$scope.this_num = $routeParams.id
@@ -425,7 +592,48 @@
 										$rootScope.articles.splice(num,1);
 										$('#my-popup-success').modal('open');	
 										clearNum = self.setInterval("autoClose_s()",1000);
-										$rootScope.count = $rootScope.count - 1;}
+										$rootScope.count2 = $rootScope.count2 - 1;}
+									else{
+										$rootScope.err =data;
+										$('#my-popup-fail').modal('open');	
+										}
+									
+								});
+							}
+						});
+					
+					}
+				})
+	.controller('ResEditController',function($scope,$rootScope,$http,$routeParams,myFactory)
+				{
+				$scope.sorts2 =["心脑血管病研究中心","肿瘤研究中心","慢阻肺研究中心","医养结合中心","示范基地","学术交流"];
+				var getObj = myFactory.getter_r();
+				var articles = getObj.articles;
+				$scope.essay = articles[$routeParams.id];
+				$scope.editNum = $routeParams.id;
+				$scope.sendEdit = function(num){
+					var formData = $scope.essay;
+					$rootScope.titleAlert = formData.title;
+					$rootScope.sortAlert = formData.sort;
+					$('#my-confirm').modal({
+						relatedTarget: formData,
+						onConfirm: function(options) {
+							//console.log(formData);
+							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
+							$http({
+								method  : 'POST',
+								url     : '/admin_send_res',
+								data    : JSON.stringify(this.relatedTarget),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									if(data == null){
+										$rootScope.articles_r.splice(num,1);
+										$('#my-popup-success-r').modal('open');	
+										clearNum = self.setInterval("autoClose_s_r()",1000);
+										$rootScope.count2 = $rootScope.count2 - 1;}
 									else{
 										$rootScope.err =data;
 										$('#my-popup-fail').modal('open');	
@@ -443,12 +651,18 @@
 					});
 		
 				})
+	.controller('ResGetController',function($scope,$http,$routeParams){
+				$http.get("/getresinfo?id="+$routeParams.id).success(function (response) {
+					$scope.essay = response[0];
+					});
+		
+				})
 	.controller('NewsUpdateController',function($scope,$http,$rootScope,$routeParams){
-				html_temp = null;
+				//html_temp = null;
 				$scope.sorts2 =["慢病头条","政策咨询","学术论文","慢病咨询"];
 				$http.get("/getnewsinfo?id="+$routeParams.id).success(function (response) {
 					$scope.essay = response[0];
-					html_temp = $scope.essay.news_body;
+					html_temp = response[0].news_body;
 					});
 				$scope.sendNewsUpdated=function(){
 					var html = ue2.getContent();
@@ -484,6 +698,47 @@
 									if(data == null){
 										$('#my-popup-success').modal('open');	
 										clearNum = self.setInterval("autoClose_s()",1000);
+										}
+									else{
+										$rootScope.err =data;
+										$('#my-popup-fail').modal('open');	
+										}
+									
+								});
+							}
+						});
+					}
+				})
+	.controller('ResUpdateController',function($scope,$http,$rootScope,$routeParams){
+				html_temp_r = null;
+				$scope.sorts2 =["心脑血管病研究中心","肿瘤研究中心","慢阻肺研究中心","医养结合中心","示范基地","学术交流"];
+				$http.get("/getresinfo?id="+$routeParams.id).success(function (response) {
+					$scope.essay = response[0];
+					html_temp_r = response[0].news_body;
+					});
+				$scope.sendNewsUpdated=function(){
+					var html = ue3.getContent();
+					$scope.essay.news_body = html;
+					var formData = $scope.essay
+					$rootScope.titleAlert = formData.news_title;
+					$rootScope.sortAlert = formData.news_sort;				
+					$('#my-confirm').modal({
+						relatedTarget: formData,
+						onConfirm: function(options) {
+							//console.log(formData);
+							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
+							$http({
+								method  : 'POST',
+								url     : '/admin_update_res_send',
+								data    : JSON.stringify(this.relatedTarget),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									if(data == null){
+										$('#my-popup-success-r').modal('open');	
+										clearNum = self.setInterval("autoClose_s_r()",1000);
 										}
 									else{
 										$rootScope.err =data;
@@ -555,17 +810,33 @@
 				templateUrl:'news_datail.html',
 				controller: 'NewsDtlController'
 			})
+		.when('/res_detail/:id',{
+				templateUrl:'res_datail.html',
+				controller: 'ResDtlController'
+			})
 		.when('/news_edit/:id',{
 				templateUrl:'admin_edit_news',
 				controller: 'NewsEditController'
+			})
+		.when('/res_edit/:id',{
+				templateUrl:'admin_edit_res',
+				controller: 'ResEditController'
 			})
 		.when('/news_get/:id',{
 				templateUrl:'admin_get_news.html',
 				controller: 'NewsGetController'
 			})
+		.when('/res_get/:id',{
+				templateUrl:'admin_get_res.html',
+				controller: 'ResGetController'
+			})
 		.when('/news_update/:id',{
 				templateUrl:'admin_update_news',
 				controller: 'NewsUpdateController'
+			})
+		.when('/res_update/:id',{
+				templateUrl:'admin_update_res',
+				controller: 'ResUpdateController'
 			})
 		.when('/add_e',{templateUrl:'admin_add_e'})
 		.when('/view_e',{template:'04这是查看新专家页面'})
@@ -573,7 +844,10 @@
 				templateUrl:'admin_add_r',
 				controller: 'ResAddController'
 			})
-		.when('/view_r',{template:'06这是查看研究动态页面'})
+		.when('/view_r',{
+				templateUrl:'admin_view_r',
+				controller: 'ResViewController'
+			})
 		.when('/add_base',{template:'07这是发布基地页面'})
 		.when('/view_base',{template:'08这是查看基地页面'})
 
@@ -611,6 +885,32 @@
 		</div> 
 	</div>
 </script>
+<!-- ---查看研究详情----- -->	
+<script type="text/ng-template" id = 'res_datail.html'>
+  
+	<div class="am-cf am-padding am-padding-bottom-0">
+		<div class="am-fl am-cf">
+			<strong class="am-text-primary am-text-lg">慢病研究</strong><small>&nbsp;>>&nbsp;<a href="#/view_r">待发布</a>&nbsp;>>&nbsp;文章详情</small>
+		</div>
+	</div>
+
+    <hr>
+	<div style =" width: 750px; margin: auto;"class="am-tabs am-margin" data-am-tabs>
+		<ul class="am-tabs-nav am-nav am-nav-tabs">
+		</ul>
+	
+		<p align="center"><b>{{essay.title}}</b></p>
+		<p><b>来源：</b>{{essay.source}}</p>
+		<p><b>日期：</b>{{essay.date}}</p>
+		<p><b>分类：</b>{{essay.sort}}</p>
+		<hr>
+		<div ng-bind-html="essay.content"></div> 
+		<br><br>
+		<div class="am-margin">
+			<input  type="button"  ng-click="sendres(this_num)" class="am-btn am-btn-primary am-btn-default" value = "发布文章">
+		</div> 
+	</div>
+</script>
 <!-- ---从服务器获取新闻内容----- -->	
 <script type="text/ng-template" id = 'admin_get_news.html'>
   
@@ -634,6 +934,28 @@
 		<br><br>
 	</div>
 </script>
+<!-- ---从服务器获取res----- -->	
+<script type="text/ng-template" id = 'admin_get_res.html'>
+  
+	<div class="am-cf am-padding am-padding-bottom-0">
+		<div class="am-fl am-cf">
+			<strong class="am-text-primary am-text-lg">慢病研究</strong><small>&nbsp;>>&nbsp;<a href="#/view_r">已发布</a>&nbsp;>>&nbsp;文章详情</small>
+		</div>
+	</div>
 
+    <hr>
+	<div style =" width: 750px; margin: auto;"class="am-tabs am-margin" data-am-tabs>
+		<ul class="am-tabs-nav am-nav am-nav-tabs">
+		</ul>
+	
+		<p align="center"><b>{{essay.news_title}}</b></p>
+		<p><b>来源：</b>{{essay.news_source}}</p>
+		<p><b>日期：</b>{{essay.news_date}}</p>
+		<p><b>分类：</b>{{essay.news_sort}}</p>
+		<hr>
+		<div ng-bind-html="essay.news_body"></div> 
+		<br><br>
+	</div>
+</script>
 </body>
 </html>
