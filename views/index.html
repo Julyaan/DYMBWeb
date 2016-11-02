@@ -87,18 +87,13 @@
 							<div class="more tl"><a href="/news">MORE</a></div>
 						</div>
 						<div class="annou-con">
+							<%	for(var i = 0;i < 3 ; i++) { %>
+							<%	if(list[4][i]){ %>
 				           <div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
+							       <a class="pp" href="/news_details?id=<%= list[4][i].id %>"><%= list[4][i].news_title %></a>
 						   </div>
-						   <div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
-						   </div>
-						   <div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="#">抚余市工作调研</a>
-						   </div>
+						   <%	}} %>
 						</div>						
 				    </div>
 				<% if(locals.islogin) { %>
@@ -127,7 +122,7 @@
 						     <div class="title-xn fs14 tl"><span class="icon"></span>专家介绍</div>
 							 <div class="more tl"><a href="/doctor_more" target="_blank">MORE</a></div>
 						</div>
-						<div class="doctor">						  
+						<div class="doctor">						
 						  <div class="layer">
 						      <a href="/doctor_info?id=3"><img src="image/doc_img_zns.jpg"/></a>
 							  <div class="doc-info fs12">
@@ -180,113 +175,61 @@
 						<div class="panel-4 panel-lit">
                             <div class="top-lit">
 							    <div class="title-xn fs14 tl"><span class="icon"></span>心脑血管</div>
-								<div class="more tl"><a href="/research01">MORE</a></div>
+								<div class="more tl"><a href="/%E5%BF%83%E8%84%91%E8%A1%80%E7%AE%A1%E7%97%85%E7%A0%94%E7%A9%B6%E4%B8%AD%E5%BF%83">MORE</a></div>
 							</div>
 							<div class="annou-con">
+							<%	for(var i = 0;i < 5 ; i++) { %>
+							<%	if(listres[0][i]){ %>	
 							    <div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=1">心脑血管疾病主要包括哪些？</a>
+							       <a class="pp" href="/research_details?id=<%= listres[0][i].id %>"><%= listres[0][i].news_title %>"</a>
 						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=2">中国面临心脑血管病大流行</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=3">预防心脑血管病 警惕隐性血栓</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=1">《中国心血管病报告》在沈发布</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=1">  心血管病死亡率仍居首位</a>
-						        </div>
+							<%	}} %>	
 							</div>   
 						</div>		
 						<div class="panel-4 panel-lit">
                             <div class="top-lit">
 							     <div class="title-xn fs14 tl"><span class="icon"></span>肿瘤</div>
-								 <div class="more tl"><a href="/research02">MORE</a></div>
+								 <div class="more tl"><a href="/%E8%82%BF%E7%98%A4%E7%A0%94%E7%A9%B6%E4%B8%AD%E5%BF%83">MORE</a></div>
 						    </div>
 							<div class="annou-con">
+							  <%	for(var i = 0;i < 5 ; i++) { %>
+							<%	if(listres[1][i]){ %>	
 							    <div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=1001">三大生活细节让你远离脑肿瘤</a>
+							       <a class="pp" href="/research_details?id=<%= listres[1][i].id %>"><%= listres[1][i].news_title %>"</a>
 						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=1002">肿瘤已被认领</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=1002">主要做到这几点让你远离肿瘤君</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=1002">肿瘤预防 锁定</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=1002">癌症的预防与治疗</a>
-						        </div>
+							<%	}} %>	
 							</div>   
 						</div>		
 						<div class="panel-4 panel-lit">
                             <div class="top-lit">
 							    <div class="title-xn fs14 tl"><span class="icon"></span>慢阻肺</div>
-								<div class="more tl"><a href="/research03">MORE</a></div>
+								<div class="more tl"><a href="/%E6%85%A2%E9%98%BB%E8%82%BA%E7%A0%94%E7%A9%B6%E4%B8%AD%E5%BF%83">MORE</a></div>
 							</div>
 							<div class="annou-con">
+							<%	for(var i = 0;i < 5 ; i++) { %>
+							<%	if(listres[2][i]){ %>	
 							    <div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=2001">慢阻肺 锁定</a>
+							       <a class="pp" href="/research_details?id=<%= listres[2][i].id %>"><%= listres[2][i].news_title %>"</a>
 						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=2001">慢阻肺定义 慢阻肺是什么病</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=2001">慢阻肺治疗展望.ppt</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=2001">关注慢阻肺永远不晚(图)</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=2001">慢阻肺患者健康生活</a>
-						        </div>								
+							<%	}} %>						
 							</div>   
 						</div>		
 						<div class="panel-4 panel-lit">
                             <div class="top-lit">
 							    <div class="title-xn fs14 tl"><span class="icon"></span>医养结合</div>
-								<div class="more tl"><a href="/research04">MORE</a></div>
+								<div class="more tl"><a href="/%E5%8C%BB%E5%85%BB%E7%BB%93%E5%90%88%E4%B8%AD%E5%BF%83">MORE</a></div>
 							</div>
 							<div class="annou-con">
+							<%	for(var i = 0;i < 5 ; i++) { %>
+							<%	if(listres[3][i]){ %>	
 							    <div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=3001">中国医养结合模式深度调研</a>
+							       <a class="pp" href="/research_details?id=<%= listres[3][i].id %>"><%= listres[3][i].news_title %>"</a>
 						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=3001">解密“医养结合”</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=3001">南通市医养结合提案</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=3001">“医养结合”还需迈过几道坎儿</a>
-						        </div>
-								<div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=3001">关于加快推进“医养结合”养老模式的提案</a>
-						        </div>								
+							<%	}} %>									
 							</div>   
 						</div>		
 								
@@ -299,31 +242,13 @@
 							 <div class="more tl"><a href="/bases">MORE</a></div>
 						</div>
                         <div class="annou-con">
-				           <div class="menu fs14">
+				           	<%	for(var i = 0;i < 6 ; i++) { %>
+							<%	if(listres[4][i]){ %>	
+							    <div class="menu fs14">
 							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=9001">解放军总医院远程医…</a>
-						   </div>
-						   <div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=9002">佳县远程会诊系统开通</a>
-						   </div>
-						   <div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=9003">河南省—光山县</a>
-						   </div>
-						   <div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=9004">宽城县</a>
-						   </div>
-						   <div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=9001">康保县</a>
-						   </div>
-						   <div class="menu fs14">
-							       <span class="circle"></span>
-							       <a class="pp" href="/research_details?id=9001">什邡市</a>
-						   </div>
-						   
+							       <a class="pp" href="/research_details?id=<%= listres[4][i].id %>"><%= listres[4][i].news_title %>"</a>
+						        </div>
+							<%	}} %>	
 				       </div>	 
 			     </div>
 		     </div>

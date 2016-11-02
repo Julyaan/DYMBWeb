@@ -4,7 +4,8 @@ var usr=require('dao/dbConnect');
 var formidable = require('formidable'),
 	  fs = require('fs'),
 	AVATAR_UPLOAD_FOLDER = '/avatar/'
-/* GET home page. */
+var async = require('async');
+	/* GET home page. */
 router.get('/upload', function(req, res) {
   res.render('upload', { title: "文件上传to_GUO's_PC" });
 });
@@ -58,6 +59,61 @@ router.post('/upload', function(req, res) {
 	res.render('upload', { title: "文件上传成功" });	  
 });
 
+router.post('/upload_exp', function(req, res,next) {
+	client = usr.connect();
+	var form = new formidable.IncomingForm();   //创建上传表单
+	form.encoding = 'utf-8';		//设置编辑
+	form.uploadDir = 'public/image/';	 //设置上传目录
+	form.keepExtensions = true;	 //保留后缀
+	form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
+	
+	async.waterfall([
+		function(callback){
+			form.parse(req, function(err, fields, files) {
+	
+				if (err) {
+				  res.send(err);
+				  console.log("err form line 72:"+err);
+				  return;		
+				}  
+			
+				var avatarName = files.avatar.name;
+				fields.avatar = avatarName;
+				var newPath = form.uploadDir + avatarName;
+				
+				fs.renameSync(files.avatar.path, newPath);  //重命名
+				console.log("hello from parse's call");	
+				callback(null, fields);
+			});
+		},
+		function(fields, callback){
+		 	for(var key in fields){
+				if(key.indexOf("info") == 0){
+					fields[key] = "<p>"+fields[key].replace("\r\n","</p><p>")+"</p>";
+				}
+			}
+			console.log("hello form second");			
+			callback(null, fields);
+		},
+		function(doctor, callback){
+			console.log("3333bbb");
+			console.log(doctor);
+			
+			usr.insertDoc(client, doctor ,function(err) {
+				console.log("12333");
+				console.log("err from router when adding doctors:"+err);
+				callback(err);	
+			});
+		},
+		function(err,callback){
+			console.log("44444")
+			client.release();
+		}
+	], function (err, result) {
+	    console.log("err form waterfall3333333333");
+	});
+ 	res.send("success");
+});
 
 router.get('/', function(req, res) {
 	var login_num = 0;
@@ -72,7 +128,7 @@ router.get('/', function(req, res) {
 	}
 	client=usr.connect();
 	
-	function selectLN(sort,i){
+	/* function selectLN(sort,i){
 		usr.selectLatest(client,sort[j],function (result) {
 		for(var o in result){
 			var time = JSON.stringify(result[o].news_date);
@@ -83,21 +139,14 @@ router.get('/', function(req, res) {
 		j++;
 		
 		donext(result,i,function(i){
-			console.log("i:"+i);
+			//console.log("i:"+i);
 			i++;
-			if(i<4)
+			if(i<5)
 				selectLN(sort,i)
 			else{
 				//rs = JSON.stringify(rs);
 				//console.log(result);
-				res.render('index', { 
-					title: '首页', 
-					test:res.locals.islogin,
-					login_num:login_num,
-					list:rs,				
-					status1: 'active',status2: '',status3: '',status4: '',
-					status5: '',status6: '',status7: '',status8: '',status9: ''
-					});
+				
 				}
 			});
 		});
@@ -106,16 +155,129 @@ router.get('/', function(req, res) {
 	function donext(res,i,callback)
 	{	
 		rs[i]= res;
-		console.log(i+":"+JSON.stringify(rs[i]));
+		//console.log(i+":"+JSON.stringify(rs[i]));
 		callback(i);
 		
-	}
-	
-	var sort = ["sort1","sort2","sort3","sort4"];
-	var rs = [];
+	} */
+	//初始化获取首页新闻参数 
+	var rs = [],rss=[];
+	rss[0]=[];rss[1]=[];rss[2]=[];rss[3]=[];rss[4]=[];
 	var i = 0;
 	var j = 0;
-	selectLN(sort,i);
+	//async瀑布流依次获取新闻，慢病研究，示范基地，学术交流
+	async.waterfall([
+		function(callback){
+		 // 获取1
+		  usr.selectLatest(client,"sort1",function (result) {
+			for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+			rs[0]=result;
+			console.log("111111"+result);	
+			callback(null,rs);
+		  });
+		},
+		function(rs,callback){
+		 // 获取2
+		  usr.selectLatest(client,"sort2",function (result) {
+			for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+			rs[1]=result;
+			console.log("222222"+result);	
+			callback(null,rs);
+		  });
+		},
+		function(rs,callback){
+		 // 获取3
+		  usr.selectLatest(client,"sort3",function (result) {
+			for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+			rs[2]=result;
+			console.log("333333"+result);	
+			callback(null,rs);
+		  });
+		},
+		function(rs,callback){
+		 // 获取4
+		  usr.selectLatest(client,"sort4",function (result) {
+			for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+			rs[3]=result;
+			console.log("444444"+result);	
+			callback(null,rs);
+		  });
+		},
+		function(rs,callback){
+		 // 获取5
+		  usr.selectLatest(client,"sort5",function (result) {
+			for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+			rs[4]=result;
+			console.log("555555"+result);	
+			callback(null,rs);
+		  });
+		},
+		function(rs, callback){
+		  // 获取慢病研究
+		  usr.selectLatestRes(client,function (result) {
+			for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+			
+				}
+			console.log("2222221"+rs);	
+			callback(null,rs,result);
+		  });
+		},
+		function(rs,result, callback){
+		  // 处理result
+		  console.log("000000"+result[0].news_sort);
+		  for(var o in result){
+			 console.log("=================================")
+			switch(result[o].news_sort)
+			{
+				case '心脑血管病研究中心':
+					rss[0].push(result[o]);break;
+				case '肿瘤研究中心':
+					rss[1].push(result[o]);break;
+				case '慢阻肺研究中心':
+					rss[2].push(result[o]);break;
+				case '医养结合中心':
+					rss[3].push(result[o]);break;
+				case '示范基地':
+					rss[4].push(result[o]);break;
+			}		
+		   }
+		   callback(null,rs,rss);
+		}
+	], function (err,rs,rss) {
+	  
+	   console.log("rss00000:"+rss[0]);
+	   res.render('index', { 
+					title: '首页', 
+					test:res.locals.islogin,
+					login_num:login_num,
+					list:rs,
+					listres:rss,
+					status1: 'active',status2: '',status3: '',status4: '',
+					status5: '',status6: '',status7: '',status8: '',status9: ''
+					});
+	});
 	
 });
 
@@ -342,59 +504,164 @@ router.get('/research', function (req, res, next) {
         test:res.locals.islogin,
     });
 });
-router.get('/research01', function (req, res, next) {
+router.get('/%E5%BF%83%E8%84%91%E8%A1%80%E7%AE%A1%E7%97%85%E7%A0%94%E7%A9%B6%E4%B8%AD%E5%BF%83', function (req, res, next) {
 	if(req.session.islogin){
         res.locals.islogin=req.session.islogin;
     }
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    res.render('research01', {
-        title: '心脑血管病研究中心',
-		status1: '',status2: '',status3: '',status4: 'active',status5: '',status6: '',status7: '',status8: '',status9: '',
-        test:res.locals.islogin,
-    });
+	client = usr.connect();
+	usr.selectLatestResS(client,"心脑血管病研究中心",function(result){
+		for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+		res.render('research01', {
+			title: '心脑血管病研究中心',
+			status1: '',status2: '',status3: '',status4: 'active',status5: '',status6: '',status7: '',status8: '',status9: '',
+			test:res.locals.islogin,
+			list:result
+		});
+	});
 });
-router.get('/research02', function (req, res, next) {
+router.get('/%E8%82%BF%E7%98%A4%E7%A0%94%E7%A9%B6%E4%B8%AD%E5%BF%83', function (req, res, next) {
 	if(req.session.islogin){
         res.locals.islogin=req.session.islogin;
     }
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    res.render('research02', {
-        title: '肿瘤研究中心',
-		status1: '',status2: '',status3: '',status4: 'active',status5: '',status6: '',status7: '',status8: '',status9: '',
-        test:res.locals.islogin,
-    });
+	client = usr.connect();
+	usr.selectLatestResS(client,"肿瘤研究中心",function(result){
+		for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+		res.render('research01', {
+			title: '肿瘤研究中心',
+			status1: '',status2: '',status3: '',status4: 'active',status5: '',status6: '',status7: '',status8: '',status9: '',
+			test:res.locals.islogin,
+			list:result
+		});
+	});
 });
-router.get('/research03', function (req, res, next) {
+router.get('/%E6%85%A2%E9%98%BB%E8%82%BA%E7%A0%94%E7%A9%B6%E4%B8%AD%E5%BF%83', function (req, res, next) {
 	if(req.session.islogin){
         res.locals.islogin=req.session.islogin;
     }
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    res.render('research03', {
-        title: '慢阻病研究中心',
-		status1: '',status2: '',status3: '',status4: 'active',status5: '',status6: '',status7: '',status8: '',status9: '',
-        test:res.locals.islogin,
-    });
+	client = usr.connect();
+	usr.selectLatestResS(client,"慢阻肺研究中心",function(result){
+		for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+		res.render('research01', {
+			title: '慢阻肺研究中心',
+			status1: '',status2: '',status3: '',status4: 'active',status5: '',status6: '',status7: '',status8: '',status9: '',
+			test:res.locals.islogin,
+			list:result
+		});
+	});
 });
-router.get('/research04', function (req, res, next) {
+router.get('/%E5%8C%BB%E5%85%BB%E7%BB%93%E5%90%88%E4%B8%AD%E5%BF%83', function (req, res, next) {
 	if(req.session.islogin){
         res.locals.islogin=req.session.islogin;
     }
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    res.render('research04', {
-        title: '医养结合研究中心',
-		status1: '',status2: '',status3: '',status4: 'active',status5: '',status6: '',status7: '',status8: '',status9: '',
-        test:res.locals.islogin,
-    });
+	client = usr.connect();
+	usr.selectLatestResS(client,"医养结合中心",function(result){
+		for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+		res.render('research01', {
+			title: '医养结合研究中心',
+			status1: '',status2: '',status3: '',status4: 'active',status5: '',status6: '',status7: '',status8: '',status9: '',
+			test:res.locals.islogin,
+			list:result
+		});
+	});
 });
-
+router.get('/bases', function (req, res, next) {
+	if(req.session.islogin){
+        res.locals.islogin=req.session.islogin;
+    }
+    if(req.cookies.islogin){
+        req.session.islogin=req.cookies.islogin;
+    }
+	client = usr.connect();
+	usr.selectLatestResS(client,"示范基地",function(result){
+		for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+		res.render('bases', {
+			title: '研究基地',
+			status1: '',status2: '',status3: '',status4: '',status5: 'active',status6: '',status7: '',status8: '',status9: '',
+			test:res.locals.islogin,
+			list:result
+		});
+	});
+});
+router.get('/bases_details', function (req, res, next) {
+	if(req.session.islogin){
+        res.locals.islogin=req.session.islogin;
+    }
+    if(req.cookies.islogin){
+        req.session.islogin=req.cookies.islogin;
+    }
+	//selectRes
+	var id = req.query.id;
+	client=usr.connect();
+	usr.selectRes(client,id, function (result) {
+		var time = JSON.stringify(result[0].news_date);
+		console.log("the news is:"+time.substring(0,11));
+		time = time.substring(1,11);
+		result[0].news_date=time;
+		//console.log("the doctor is:"+result[0].name);
+		res.render('bases_details', {
+			title: result[0].news_title,
+			status1: '',status2: '',status3: '',status4: '',status5: 'active',status6: '',status7: '',status8: '',status9: '',
+			test:res.locals.islogin,
+			research:result[0],
+		});
+		
+	});
+});
+//学术交流
+router.get('/%E5%AD%A6%E6%9C%AF%E4%BA%A4%E6%B5%81', function (req, res, next) {
+	if(req.session.islogin){
+        res.locals.islogin=req.session.islogin;
+    }
+    if(req.cookies.islogin){
+        req.session.islogin=req.cookies.islogin;
+    }
+	client = usr.connect();
+	usr.selectLatestResS(client,"学术交流",function(result){
+		for(var o in result){
+				var time = JSON.stringify(result[o].news_date);
+				time = time.substring(1,11);
+				result[o].news_date = time;
+				}
+		res.render('learning01', {
+			title: '学术交流',
+			status1: '',status2: '',status3: '',status4: '',status5: '',status6: '',status7: '',status8: 'active',status9: '',
+			test:res.locals.islogin,
+			list:result
+		});
+	});
+});
 router.get('/research_details', function (req, res, next) {
 	if(req.session.islogin){
         res.locals.islogin=req.session.islogin;
@@ -405,31 +672,20 @@ router.get('/research_details', function (req, res, next) {
 	//selectRes
 	var id = req.query.id;
 	client=usr.connect();
-	result = null;
 	usr.selectRes(client,id, function (result) {
+		var time = JSON.stringify(result[0].news_date);
+		console.log("the news is:"+time.substring(0,11));
+		time = time.substring(1,11);
+		result[0].news_date=time;
 		//console.log("the doctor is:"+result[0].name);
 		res.render('research_details', {
-			title: result[0].title,
+			title: result[0].news_title,
 			status1: '',status2: '',status3: '',status4: 'active',status5: '',status6: '',status7: '',status8: '',status9: '',
 			test:res.locals.islogin,
 			research:result[0],
 		});
 		
 	});
-});
-//研究基地
-router.get('/bases', function (req, res, next) {
-	if(req.session.islogin){
-        res.locals.islogin=req.session.islogin;
-    }
-    if(req.cookies.islogin){
-        req.session.islogin=req.cookies.islogin;
-    }
-    res.render('bases', {
-        title: '心脑血管病研究中心',
-		status1: '',status2: '',status3: '',status4: '',status5: 'active',status6: '',status7: '',status8: '',status9: '',
-        test:res.locals.islogin,
-    });
 });
 //专家资源
 router.get('/doctor_more', function (req, res, next) {
@@ -439,11 +695,17 @@ router.get('/doctor_more', function (req, res, next) {
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    res.render('doctor_more', {
-        title: '专家资源',
-		status1: '',status2: '',status3: '',status4: '',status5: '',status6: 'active',status7: '',status8: '',status9: '',
-        test:res.locals.islogin,
-    });
+	client = usr.connect();
+	usr.selectLatestExp(client,function(result){
+		console.log(JSON.stringify(result));
+		res.render('doctor_more', {
+			title: '专家资源',
+			status1: '',status2: '',status3: '',status4: '',status5: '',status6: 'active',status7: '',status8: '',status9: '',
+			test:res.locals.islogin,
+			list:result,
+		});
+	});
+   
 });
 router.get('/doctor_info', function (req, res, next) {
 	if(req.session.islogin){
@@ -478,7 +740,7 @@ router.get('/learning', function (req, res, next) {
     }
     res.render('learning', {
         title: '学术交流',
-		status1: '',status2: '',status3: '',status4: '',status5: '',status6: '',status7: '',status8: 'active',status9: '',
+		status1: '',status2: '',status3: '',status4: '',status5: '',status6: '',status7: 'active',status8: '',status9: '',
         test:res.locals.islogin,
     });
 });
@@ -578,6 +840,12 @@ router.get('/admin_view_r', function (req, res, next) {
 			
 		});
 });
+router.get('/admin_view_e', function (req, res, next) {
+	console.log("admin_view_e");
+		res.render('admin/view_e', {
+			
+		});
+});
 //编辑新闻
 router.get('/admin_edit_news', function (req, res, next) {
 	console.log("admin_edit_news");
@@ -614,6 +882,8 @@ router.get('/getnewsinfo', function (req, res, next) {
 					result[0].news_sort = '学术论文';break;
 				case 'sort4':
 					result[0].news_sort = '慢病咨询';break;
+				case 'sort5':
+					result[0].news_sort = '公告栏';break;
 			}
 			res.json(result);
 		});
@@ -668,6 +938,16 @@ router.post('/dangerwaytodothis_r',function(req,res,next){
 		res.json(err);
 	});
 });
+//删除服务器处exp
+router.post('/dangerwaytodothis_e',function(req,res,next){
+	var id = req.body.id;
+	console.log("id=:"+id);
+	client =usr.connect();
+	usr.deleteExp(client,id,function(err){
+		console.log("err from router when deleting:"+err);
+		res.json(err);
+	});
+});
 //修改新闻发布状态
 router.post('/dangerwaytodothis2',function(req,res,next){
 	var status = req.body.status;
@@ -686,6 +966,17 @@ router.post('/dangerwaytodothis2_r',function(req,res,next){
 	console.log("status=:"+status);
 	client =usr.connect();
 	usr.SetResStatus(client,id,status,function(err){
+		console.log("err from router when deleting:"+err);
+		res.json(err);
+	});
+});
+//修改exp发布状态
+router.post('/dangerwaytodothis2_e',function(req,res,next){
+	var status = req.body.status;
+	var id = req.body.id;
+	console.log("status=:"+status);
+	client =usr.connect();
+	usr.SetExpStatus(client,id,status,function(err){
 		console.log("err from router when deleting:"+err);
 		res.json(err);
 	});
@@ -746,6 +1037,8 @@ router.get('/getnews', function (req, res, next) {
 					result[o].news_sort = '学术论文';break;
 				case 'sort4':
 					result[o].news_sort = '慢病咨询';break;
+				case 'sort5':
+					result[o].news_sort = '公告栏';break;
 			}
 			var time = JSON.stringify(result[o].news_date);	
 			result[o].news_date = time.substring(1,11);
@@ -767,5 +1060,12 @@ router.get('/getres', function (req, res, next) {
 		res.json(result);	
 	});
 });
-	
+router.get('/getexp', function (req, res, next) {
+	client=usr.connect();
+	result = null;
+	usr.selectExpList(client,function (result) {		
+		console.log(result);
+		res.json(result);	
+	});
+});
 module.exports = router;

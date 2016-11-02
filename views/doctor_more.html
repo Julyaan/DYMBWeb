@@ -43,19 +43,9 @@
 		      <div class="new_b clearhid">
 			     <div class="content_doc">
 				   <div class="clearhid">
-						<div class="doc_img doc"><a href="/doctor_info?id=1"><img src="image/doc_fdm.jpg"></a><p>樊代明</p></div>
-						<div class="doc_img doc"><a href="/doctor_info?id=2"><img src="image/doc_grl.jpg"></a><p>高润霖</p></div>
-						<div class="doc_img doc"><a href="/doctor_info?id=3"><img src="image/doc_zns.jpg"></a><p>钟南山</p></div>
-						<div class="doc_img doc"><a href="/doctor_info?id=4"><img src="image/doc_ckj.jpg"></a><p>陈可冀</p></div>
-						<div class="doc_img doc"><a href="/doctor_info?id=5"><img src="image/doc_lsb.jpg"></a><p>卢世璧</p></div>
-						<div class="doc_img doc"><a href="/doctor_info?id=6"><img src="image/doc_qgx.jpg"></a><p>邱贵兴</p></div>
-						<div class="doc_img doc"><a href="/doctor_info?id=7"><img src="image/doc_cxm.jpg"></a><p>陈香美</p></div>		 
-						<div class="doc_img doc"><a href="/doctor_info?id=8"><img src="image/doc_zjc.jpg"></a><p>郑静晨</p></div>
-						<div class="doc_img doc"><a href="/doctor_info?id=9"><img src="image/doc_wc.jpg"></a><p>王辰</p></div>
-						<div class="doc_img doc"><a href="/doctor_info?id=10"><img src="image/doc_cxh.jpg"></a><p>陈晓红</p></div>
-						<div class="doc_img doc"><a href="/doctor_info?id=11"><img src="image/doc_ljh.jpg"></a><p>郎景和</p></div>				  
-						<div class="doc_img doc"><a href="/doctor_info?id=12"><img src="image/doc_hyl.jpg"></a><p>韩雅玲</p></div>
-						<div class="doc_img doc"><a href="/doctor_info?id=13"><img src="image/doc_yl.jpg"></a><p>尹岭</p></div>
+					 <%	for(var i in list) { %>
+						<div class="doc_img doc"><a href="/doctor_info?id=<%= list[i].id %>"><img src="image/<%= list[i].avatar %>"></a><p><%= list[i].name %></p></div>
+						<% } %>
 					</div>
 				 </div>
 		      </div>

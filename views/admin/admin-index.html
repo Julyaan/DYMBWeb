@@ -89,8 +89,8 @@
 		<li class="admin-parent">
           <a class="am-cf" data-am-collapse="{target: '#collapse-nav4'}"><span class="am-icon-shield"></span> 研究基地 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
           <ul class="am-list am-collapse admin-sidebar-sub " id="collapse-nav4">
-            <li><a href="#/add_base"><span class="am-icon-cube"></span> 新建</a></li>
-            <li><a href="#/view_base"><span class="am-icon-cubes"></span> 查看</a></li>
+            <li><a href="#/add_r"><span class="am-icon-cube"></span> 新建</a></li>
+            <li><a href="#/view_r"><span class="am-icon-cubes"></span> 查看</a></li>
           </ul>
         </li>
 		<li><a href="admin-table.html"><span class="am-icon-pencil-square-o"></span> 留言管理</a></li>
@@ -250,13 +250,7 @@
 	$('#my-popup-success').on('close.modal.amui', function(){
 	window.location.href =	"#/view_news";
 	});
-	$('#my-popup-success2').on('close.modal.amui', function(){
-	window.location.href =	"#/view_news";
-	});
 	$('#my-popup-success-r').on('close.modal.amui', function(){
-	window.location.href =	"#/view_r";
-	});
-	$('#my-popup-success2-r').on('close.modal.amui', function(){
 	window.location.href =	"#/view_r";
 	});
 	angular.module('routingDemoApp',['ngRoute', 'ngSanitize'])
@@ -271,7 +265,8 @@
 					"慢病头条":"慢病头条",
 					"政策咨询":"政策咨询",
 					"学术论文":"学术论文",
-					"慢病咨询":"慢病咨询"
+					"慢病咨询":"慢病咨询",
+					"公告栏":"公告栏"
 					};
 				
 				$scope.getData = function(){
@@ -304,6 +299,18 @@
 					console.log("add research:it's:"+$scope.content);
 					}
 				})
+	.controller('EaddController',function ($scope,$rootScope,myFactory) 
+				{
+				$scope.getData = function(){
+					$rootScope.count = $rootScope.count + 1;
+					$scope.date = $("#date").val();
+					var html = ue.getContent();
+					//$scope.content = $("#contenCarrier").html();
+					$scope.content = html;
+					myFactory.setter($scope.title,$scope.source,$scope.date,$scope.sort,$scope.content);
+					console.log("add news:it's:"+$scope.content);
+					}
+				})
 	.controller('NewsViewController',function ($scope,$rootScope,$http,myFactory) 
 				{
 				var getObj = myFactory.getter();
@@ -331,6 +338,8 @@
 									this.relatedTarget.sort = 'sort3';break;
 								case '慢病咨询':
 									this.relatedTarget.sort = 'sort4';break;
+								case '公告栏':
+									this.relatedTarget.sort = 'sort5';break;
 							}
 							//console.log(formData);
 							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
@@ -416,6 +425,126 @@
 								$http({
 									method  : 'POST',
 									url     : '/dangerwaytodothis2',
+									data    :  JSON.stringify(formData),  
+									contentType: "application/json; charset=utf-8",
+									dataType: "json", 
+									}).error(function(err){
+										alert("failed:"+err)
+									}).success(function(data){
+										$scope.refresh();
+										});
+								}
+					}
+				})
+	.controller('EViewController',function ($scope,$rootScope,$http) 
+				{
+				$scope.go = function(url){
+					console.log("url:"+url);
+					//$location.path(url);
+					window.location.href =	url;
+					}
+				$rootScope.send = function(num){
+					var formData = $rootScope.articles[num];
+					$rootScope.titleAlert = formData.title;
+					$rootScope.sortAlert = formData.sort;
+					$('#my-confirm').modal({
+						relatedTarget: formData,
+						onConfirm: function(options) {
+							switch(this.relatedTarget.sort)
+							{
+								case '慢病头条':
+									this.relatedTarget.sort = 'sort1';break;
+								case '政策咨询':
+									this.relatedTarget.sort = 'sort2';break;
+								case '学术论文':
+									this.relatedTarget.sort = 'sort3';break;
+								case '慢病咨询':
+									this.relatedTarget.sort = 'sort4';break;
+							}
+							//console.log(formData);
+							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
+							$http({
+								method  : 'POST',
+								url     : '/admin_send_news',
+								data    : JSON.stringify(this.relatedTarget),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									if(data == null){
+										$rootScope.articles.splice(num,1);
+										$('#my-popup-success').modal('open');	
+										clearNum = self.setInterval("autoClose_s()",1000);
+										$rootScope.count = $rootScope.count - 1;}
+									else{
+										$rootScope.err =data;
+										$('#my-popup-fail').modal('open');	
+										}
+									
+								});
+							}
+						});
+					}					
+				
+				$http.get("/getexp").success(function (response) {
+					$scope.expList = response;
+					$scope.expNum = $scope.expList.length;
+					});
+				$scope.refresh = function(){
+					$http.get("/getexp").success(function (response) {
+						$scope.expList = response;
+						$scope.expNum = $scope.expList.length;
+						});
+					}
+				$scope.delete = function(num){
+					var formData = {"id":num};
+					$('#my-confirm-delete').modal({
+						relatedTarget: formData,
+						onConfirm: function(options) {
+							//console.log(formData);
+							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
+							$http({
+								method  : 'POST',
+								url     : '/dangerwaytodothis_e',
+								data    : JSON.stringify(this.relatedTarget),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									if(data == null){					
+										$('#my-popup-success2').modal('open');	
+										$scope.refresh();
+										}
+									else{
+										$rootScope.err =data;
+										$('#my-popup-fail').modal('open');	
+										}
+									
+								});
+							}
+						});
+					}
+				$scope.changeStatus = function(num,id){
+					console.log("changeStatus:"+num);
+					if(num == 'on'){
+						var formData = {"id":id,"status":"off"};
+						$http({
+								method  : 'POST',
+								url     : '/dangerwaytodothis2_e',
+								data    : JSON.stringify(formData),  
+								contentType: "application/json; charset=utf-8",
+								dataType: "json", 
+								}).error(function(err){
+									alert("failed:"+err)
+								}).success(function(data){
+									$scope.refresh();
+										});
+						}else{	var formData = {"id":id,"status":"on"};
+								$http({
+									method  : 'POST',
+									url     : '/dangerwaytodothis2_e',
 									data    :  JSON.stringify(formData),  
 									contentType: "application/json; charset=utf-8",
 									dataType: "json", 
@@ -554,7 +683,7 @@
 				})
 	.controller('NewsEditController',function($scope,$rootScope,$http,$routeParams,myFactory)
 				{
-				$scope.sorts2 =["慢病头条","政策咨询","学术论文","慢病咨询"];
+				$scope.sorts2 =["慢病头条","政策咨询","学术论文","慢病咨询","公告栏"];
 				var getObj = myFactory.getter();
 				var articles = getObj.articles;
 				$scope.essay = articles[$routeParams.id];
@@ -576,6 +705,8 @@
 									this.relatedTarget.sort = 'sort3';break;
 								case '慢病咨询':
 									this.relatedTarget.sort = 'sort4';break;
+								case '公告栏':
+									this.relatedTarget.sort = 'sort5';break;
 							}
 							//console.log(formData);
 							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
@@ -659,7 +790,7 @@
 				})
 	.controller('NewsUpdateController',function($scope,$http,$rootScope,$routeParams){
 				//html_temp = null;
-				$scope.sorts2 =["慢病头条","政策咨询","学术论文","慢病咨询"];
+				$scope.sorts2 =["慢病头条","政策咨询","学术论文","慢病咨询","公告栏"];
 				$http.get("/getnewsinfo?id="+$routeParams.id).success(function (response) {
 					$scope.essay = response[0];
 					html_temp = response[0].news_body;
@@ -673,16 +804,18 @@
 					$('#my-confirm').modal({
 						relatedTarget: formData,
 						onConfirm: function(options) {
-							switch(this.relatedTarget.sort)
+							switch(this.relatedTarget.news_sort)
 							{
 								case '慢病头条':
-									this.relatedTarget.sort = 'sort1';break;
+									this.relatedTarget.news_sort = 'sort1';break;
 								case '政策咨询':
-									this.relatedTarget.sort = 'sort2';break;
+									this.relatedTarget.news_sort = 'sort2';break;
 								case '学术论文':
-									this.relatedTarget.sort = 'sort3';break;
+									this.relatedTarget.news_sort = 'sort3';break;
 								case '慢病咨询':
-									this.relatedTarget.sort = 'sort4';break;
+									this.relatedTarget.news_sort = 'sort4';break;
+								case '公告栏':
+									this.relatedTarget.news_sort = 'sort5';break;
 							}
 							//console.log(formData);
 							console.log("ajax_send:"+JSON.stringify(this.relatedTarget));
@@ -838,8 +971,8 @@
 				templateUrl:'admin_update_res',
 				controller: 'ResUpdateController'
 			})
-		.when('/add_e',{templateUrl:'admin_add_e'})
-		.when('/view_e',{template:'04这是查看新专家页面'})
+		.when('/add_e',{templateUrl:'admin_add_e',controller: 'EaddController'})
+		.when('/view_e',{templateUrl:'admin_view_e',controller: 'EViewController'})
 		.when('/add_r',{
 				templateUrl:'admin_add_r',
 				controller: 'ResAddController'
@@ -848,9 +981,6 @@
 				templateUrl:'admin_view_r',
 				controller: 'ResViewController'
 			})
-		.when('/add_base',{template:'07这是发布基地页面'})
-		.when('/view_base',{template:'08这是查看基地页面'})
-
 		.otherwise({redirectTo:'/'});
 		
 	}]);

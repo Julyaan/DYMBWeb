@@ -100,7 +100,7 @@
 						  </tr>
 						  </thead>
 						  <tbody>
-						  <tr ng-repeat="x in newsList | filter:keywords | orderBy:order:true">
+						  <tr style="font-size:1.3rem" ng-repeat="x in newsList | filter:keywords | orderBy:order:true">
 							<td><input type="checkbox" /></td>
 							<td>{{ $index + 1 }}</td>
 							<td><a href="#/news_get/{{x.id}}">{{x.news_title}}</a></td>

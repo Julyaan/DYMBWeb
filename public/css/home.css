@@ -246,6 +246,9 @@
 	margin: 0;
 	line-height: 30px;
 	text-align: left;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
 }
 .menu .circle{
    width: 6px;

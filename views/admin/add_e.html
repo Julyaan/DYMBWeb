@@ -1,95 +1,283 @@
-
-    <div class="am-cf am-padding am-padding-bottom-0">
-      <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">新闻动态</strong> /
-        <small>发布新闻</small>
+ <div class="admin-content" style=" overflow-y: hidden;">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong> / <small>Personal information</small></div>
       </div>
-    </div>
-    <hr>
 
-    <div class="am-tabs am-margin" data-am-tabs>
-      <ul class="am-tabs-nav am-nav am-nav-tabs">
-		<li class="am-active"><a href="#tab1">新建会议</a></li>
-      </ul>
+      <hr/>
 
-      <div class="am-tabs-bd">
-        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-		<div class="am-g am-margin-top">
-          <form class="am-form am-form-horizontal" data-am-validator id="releaseConference" action="../releaseConference" method="post">
-			
-            <div class="am-form-group ">
-              <label for="user-name" class="am-u-sm-4 am-u-md-2 am-form-label">会议名称</label>
-              <div class="am-u-sm-8 am-u-md-10">
-                <input class="am-input-sm" type="text" id="user-name" name="title" value="" style = "width:50%" placeholder="输入会议名称">         
+      <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-5 am-u-md-push-7" style="position: fixed;left: 64%;width: 35%;height: 70%;" >
+		
+          <div class="am-panel am-panel-default" style="overflow-y: scroll;overflow-x: hidden;height: 85%;background:#f7f7f7" >
+            <div class="am-panel-bd " >
+              <div class="am-g ">
+               
+                <div class="am-u-md-12">
+                  <p>输入结果预览：</p>
+                  <form class="am-form am-form-horizontal">
+                    <div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">姓名</label>
+							<div class="am-u-sm-2"><p class="am-form-help">{{name}}</p></div>
+						<label for="user-name" class="am-u-sm-2 am-form-label">职称</label>
+							<div class="am-u-sm-2"><p class="am-form-help">{{title}}</p></div>
+						<label for="user-name" class="am-u-sm-2 am-form-label">专业</label>
+							<div class="am-u-sm-2"><p class="am-form-help">{{major}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm"  style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">学位</label>
+							<div class="am-u-sm-2"><p class="am-form-help">{{degree}}</p></div>
+						<label for="user-name" class="am-u-sm-2 am-form-label">籍贯</label>
+							<div class="am-u-sm-2"><p class="am-form-help">{{birthplace}}</p></div>
+						<label for="user-name" class="am-u-sm-2 am-form-label">职务</label>
+							<div class="am-u-sm-2"><p class="am-form-help">{{job}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm"  style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">出身年月</label>
+							<div class="am-u-sm-4"><p class="am-form-help">{{birthdate}}</p></div>
+						<label for="user-name" class="am-u-sm-2 am-form-label">工作单位</label>
+							<div class="am-u-sm-4"><p class="am-form-help">{{workplace}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm"  style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">毕业院校</label>
+							<div class="am-u-sm-4"><p class="am-form-help">{{graduates}}</p></div>
+						<label for="user-name" class="am-u-sm-2 am-form-label">出诊时间</label>
+							<div class="am-u-sm-4"><p class="am-form-help">{{worktime}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">专业特长</label>
+							<div class="am-u-sm-10"><p class="am-form-help">{{info01}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">研究方向</label>
+							<div class="am-u-sm-10"><p class="am-form-help">{{info02}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">学习经历</label>
+							<div class="am-u-sm-10"><p class="am-form-help">{{info03}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">就职经历</label>
+							<div class="am-u-sm-10"><p class="am-form-help">{{info04}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">社会任职</label>
+							<div class="am-u-sm-10"><p class="am-form-help">{{info05}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">科研成就</label>
+							<div class="am-u-sm-10"><p class="am-form-help">{{info06}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">承担课题</label>
+							<div class="am-u-sm-10"><p class="am-form-help">{{info07}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">文章专著</label>
+							<div class="am-u-sm-10"><p class="am-form-help">{{info08}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">所获荣誉</label>
+							<div class="am-u-sm-10"><p class="am-form-help">{{info09}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">其他</label>
+							<div class="am-u-sm-10"><p class="am-form-help">{{info10}}</p></div>
+					</div>
+					<div class="am-form-group am-form-group-sm" style="background:#dddddd;">
+						<label for="user-name" class="am-u-sm-2 am-form-label">头像</label>
+							<div class="am-u-sm-10"><p class="am-form-help" id="av_file"></p></div>
+					</div>
+                  </form>
+                </div>
               </div>
             </div>
+			 
+          </div>
+		
+			<button type="button" id="sendexpbtn" onclick="doUpload()" disabled="disabled"class="am-btn am-btn-primary">预览无误，确认发布</button>
+        </div>
 
-            <div class="am-form-group	">
-              <label for="user-email" class="am-u-sm-4 am-u-md-2 am-form-label">组织人员</label>
-              <div class="am-u-sm-8 am-u-md-10">
-                <input class="am-input-sm" type="text" id="user-email" name="docname" value="" style = "width:50%" placeholder="输入组织者的名字">
+        <div class="am-u-sm-12 am-u-md-7 am-u-md-pull-5" style="overflow-y: scroll;overflow-x: hidden;height: 70%;position: fixed;right: 36%;width: 45%;">
+          <form class="am-form am-form-horizontal" method="post" enctype='multipart/form-data' id="uploadForm">
+            <div class="am-form-group am-form-group-sm">
+              <label for="user-name" class="am-u-sm-2 am-form-label">姓名</label>
+              <div class="am-u-sm-4">
+                <input type="text" id="name"  class="am-form-field" ng-model="name"  name="name" placeholder="请输入姓名">         
+              </div>
+			  <label for="user-name" class="am-u-sm-2 am-form-label">职称</label>
+              <div class="am-u-sm-4">
+                <input type="text" id="title" class="am-form-field" ng-model="title" name="title" placeholder="请输入职称">        
               </div>
             </div>
-
+            <div class="am-form-group am-form-group-sm">
+              <label for="user-name" class="am-u-sm-2 am-form-label">专业</label>
+              <div class="am-u-sm-4">
+                <input type="text" id="major"  class="am-form-field" ng-model="major" name="major" placeholder="请输入专业">              
+              </div>
+			  <label for="user-name" class="am-u-sm-2 am-form-label">学位</label>
+              <div class="am-u-sm-4">
+                <input type="text" id="degree" class="am-form-field" ng-model="degree" name="degree" placeholder="请输入学位">         
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm">
+              <label for="user-name" class="am-u-sm-2 am-form-label">籍贯</label>
+              <div class="am-u-sm-4">
+                <input type="text" id="birthplace" class="am-form-field" ng-model="birthplace" name="birthplace" placeholder="请输入籍贯">              
+              </div>
+			  <label for="user-name" class="am-u-sm-2 am-form-label">职务</label>
+              <div class="am-u-sm-4">
+                <input type="text" id="job" class="am-form-field" ng-model="job" name="job" placeholder="请输入职务">         
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm">
+              <label for="user-name" class="am-u-sm-2 am-form-label">出身年月</label>
+              <div class="am-u-sm-4">
+                <input type="text" id="birthdate" class="am-form-field" ng-model="birthdate" name="birthdate" placeholder="请输入出身年月">              
+              </div>
+			  <label for="user-name" class="am-u-sm-2 am-form-label">工作单位</label>
+              <div class="am-u-sm-4">
+                <input type="text" id="workplace" class="am-form-field" ng-model="workplace" name="workplace" placeholder="请输入工作单位">         
+              </div>
+            </div>			
+            <div class="am-form-group am-form-group-sm" >
+              <label for="user-name" class="am-u-sm-2 am-form-label">毕业院校</label>
+              <div class="am-u-sm-4">
+                <input type="text" id="graduates" class="am-form-field" ng-model="graduates" name="graduates" placeholder="请输入毕业院校">             
+              </div>
+			  <label for="user-name" class="am-u-sm-2 am-form-label">出诊时间</label>
+              <div class="am-u-sm-4">
+                <input type="text" id="worktime" class="am-form-field" ng-model="worktime" name="worktime" placeholder="请输入出诊时间">        
+              </div>
+            </div>
+           
+            <div class="am-form-group am-form-group-sm">
+              <label for="user-intro" class="am-u-sm-2 am-form-label">专业特长</label>
+              <div class="am-u-sm-10">
+                <textarea class="" rows="5" id="info01" ng-model="info01" name="info01" class="am-form-field" placeholder="输入专业特长"></textarea>
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm " >
+              <label for="user-intro" class="am-u-sm-2 am-form-label">研究方向</label>
+              <div class="am-u-sm-10">
+                <textarea class="" rows="5" id="info02" ng-model="info02" name="info02" class="am-form-field" placeholder="输入专业特长"></textarea>
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm ">
+              <label for="user-intro" class="am-u-sm-2 am-form-label">学习经历</label>
+              <div class="am-u-sm-10">
+                <textarea class="" rows="5" id="info03" ng-model="info03" name="info03" class="am-form-field" placeholder="输入学习经历"></textarea>
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm " >
+              <label for="user-intro" class="am-u-sm-2 am-form-label">就职经历</label>
+              <div class="am-u-sm-10">
+                <textarea class="" rows="5" id="info04" ng-model="info04" name="info04" class="am-form-field" placeholder="输入就职经历"></textarea>
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm ">
+              <label for="user-intro" class="am-u-sm-2 am-form-label">社会任职</label>
+              <div class="am-u-sm-10">
+                <textarea class="" rows="5" id="info05" ng-model="info05" name="info05" class="am-form-field" placeholder="输入社会任职"></textarea>
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm" >
+              <label for="user-intro" class="am-u-sm-2 am-form-label">科研成就</label>
+              <div class="am-u-sm-10">
+                <textarea class="" rows="5" id="info06" ng-model="info06" name="info06" class="am-form-field" placeholder="输入科研成就"></textarea>
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm" >
+              <label for="user-intro" class="am-u-sm-2 am-form-label">承担课题</label>
+              <div class="am-u-sm-10">
+                <textarea class="" rows="5" id="info07" ng-model="info07" name="info07" class="am-form-field" placeholder="输入承担课题"></textarea>
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm" >
+              <label for="user-intro" class="am-u-sm-2 am-form-label">文章专著</label>
+              <div class="am-u-sm-10">
+                <textarea class="" rows="5" id="info08" ng-model="info08" name="info08" class="am-form-field" placeholder="输入文章专著"></textarea>
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm">
+              <label for="user-intro" class="am-u-sm-2 am-form-label">所获荣誉</label>
+              <div class="am-u-sm-10">
+                <textarea class="" rows="5" id="info09" ng-model="info09" name="info09" class="am-form-field" placeholder="输入所获荣誉"></textarea>
+              </div>
+            </div>
+            <div class="am-form-group am-form-group-sm" >
+              <label for="user-intro" class="am-u-sm-2 am-form-label">其他</label>
+              <div class="am-u-sm-10">
+                <textarea class="" rows="3" id="info10" ng-model="info10" name="info10" class="am-form-field" placeholder="输入其他"></textarea>
+              </div>
+            </div>
+			 <div class="am-form-group am-form-group-sm" >
+              <label for="user-intro" class="am-u-sm-2 am-form-label">上传头像</label>
+              <div class="am-u-sm-10">
+              <div class="am-form-group am-form-file">
+				  <button type="button" class="am-btn am-btn-primary am-btn-sm">
+					<i class="am-icon-cloud-upload"></i> 建议选择大小为95X130像素的图片</button>
+				  <input id="doc-form-file" name="avatar" type="file" multiple>
+				</div>
+				<div id="file-list"></div>
+              </div>
+            </div>
+				
             <div class="am-form-group">
-              <label for="user-phone" class="am-u-sm-4 am-u-md-2  am-form-label">会议内容</label>
-              <div class="am-u-sm-8 am-u-md-10">
-                <textarea class="am-input-sm" rows="5"  style = "width:50%" type="text" id="user-phone" name = "content"  placeholder="输入会议的内容"></textarea>
+              <div class="am-u-sm-9 am-u-sm-push-3">
+                <button  class="am-btn am-btn-default"><i class="am-icon-arrow-right"></i>请在右侧预览输入结果</button>
               </div>
             </div>
-			
-			<div class="am-form-group am-form-inline">
-              <label for="num" class="am-u-sm-4 am-u-md-2 am-form-label">参会人数</label>
-              <div class="am-u-sm-8 am-u-md-10">
-				<div class="am-form-group ">					
-					<input class="am-form-field am-input-sm" type="number" id="num" name="num"   value=""placeholder="会议总人数">
-				</div>
-			  </div>
-            </div>
-			
-            <div class="am-form-group am-form-inline">
-              <label for="deadline" class="am-u-sm-4 am-u-md-2 am-form-label">报名截止时间</label>
-              <div class="am-u-sm-8 am-u-md-10 am-form-inline  ">
-				<div class="am-form-group am-form-icon">
-					<i class="am-icon-calendar"></i>
-					<input id="deadline" name="deadline" type="text" class="am-form-field am-input-sm" placeholder="截止时间" data-am-datepicker readonly required />
-				</div>
-			  </div>
-            </div>
-			
-			<div class="am-form-group am-form-inline">
-              <label for="deadline" class="am-u-sm-4 am-u-md-2 am-form-label">会议开始时间</label>
-              <div class="am-u-sm-8 am-u-md-10 am-form-inline  ">
-				<div class="am-form-group am-form-icon">
-					<i class="am-icon-calendar"></i>
-					<input id="starttime" name="starttime" type="text" class="am-form-field am-input-sm" placeholder="截止时间" data-am-datepicker readonly required />
-				</div>
-			  </div>
-            </div>
-
-			<div class="am-form-group">
-				<label for="m-pic" class="am-u-sm-4 am-u-md-2  am-form-label">上传图片</label>
-                    <div class="am-u-sm-8 am-u-md-10 ">
-                      <input type="file" id="m-pic" name="image">
-                      <p class="am-form-help">请选择要上传的会议图片...</p>                  
-                    </div>
-            </div>
-			
-			<div class="am-form-group am-form-inline">
-              <label for="fabu" class="am-u-sm-4 am-u-md-2 am-form-label"> </label>
-              <div class="am-u-sm-8 am-u-md-10 am-form-inline  ">
-				<div class="am-form-group ">
-					<input id="fabu"type="submit" class="am-btn am-btn-primary am-btn-default" value = "发布会议">
-				</div>
-			  </div>
-            </div>
-			
-		  </form>
-	   <span id="msg"></span>
-		</div>
-
-    </div>
-
-
+          </form>
+        </div>
       </div>
     </div>
+  </div>
+  	<div class="am-popup" id="my-popup-success-e" style="height:164px;width:500px;margin-left:-250px;margin-top:-82px;">
+		<div class="am-popup-inner" style="padding-top:58px">
+			<div class="am-popup-hd" style="height:58px;padding:5px">
+				<h4 class="am-popup-title"><span class="am-icon-md am-icon-btn am-success am-icon-check-circle"></span>&nbsp;专家信息发表成功！</h4>
+			</div> 
+			<div class="am-popup-bd am-text-center" style="height:60px">点击“确定”查看已发布内容</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn" data-am-modal-confirm>确定</span>
+			</div>
+		</div>
+	</div>
+  	<script src="assets/js/amazeui.min.js"></script>
+<script>
+  $(function() {
+	$('#doc-form-file').on('change', function() {
+	  $("#sendexpbtn").attr("disabled", false);
+	  var fileNames = '';
+	  $.each(this.files, function() {
+		fileNames += '<span class="am-badge">' + this.name + '</span> ';
+	  });
+	  $('#file-list').html(fileNames);
+	  $('#av_file').html(fileNames);
+	});
+  });
+  
+  function doUpload() {  
+     var formData = new FormData($( "#uploadForm" )[0]);  
+     $.ajax({  
+          url: 'upload_exp' ,  
+          type: 'POST',  
+          data: formData,  
+          async: false,  
+          cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (returndata) {  
+              $('#my-popup-success-e').modal('open');  
+          },  
+          error: function (returndata) {  
+              alert("服务器异常，请稍后再试"+returndata);  
+          }  
+     });  
+}  
+	
+	$('#my-popup-success-e').on('close.modal.amui', function(){
+	window.location.href =	"#/view_e";
+	});
+</script>
