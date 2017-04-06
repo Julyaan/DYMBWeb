@@ -424,12 +424,49 @@ router.get('/news02', function (req, res, next) {
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    res.render('news02', {
-        title: '政策咨询',
-		status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
-		test:res.locals.islogin,
-		list: req.session.list
-    });
+	client=usr.connect();
+	function selectLN(sort,i){
+		usr.selectLatest(client,sort[j],function (result) {
+		for(var o in result){
+			var time = JSON.stringify(result[o].news_date);
+			time = time.substring(1,11);
+			result[o].news_date = time;
+			}
+		console.log("its done:"+sort[j]);
+		j++;
+		
+		donext(result,i,function(i){
+			console.log("i:"+i);
+			i++;
+			if(i<4)
+				selectLN(sort,i)
+			else{
+				req.session.list = rs;
+				res.render('news02', {
+					title: '政策咨询',
+					status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
+					test:res.locals.islogin,
+					list: req.session.list
+				});
+				}
+			});
+		});
+	}
+	
+	function donext(res,i,callback)
+	{	
+		rs[i]= res;
+		console.log(i+":"+JSON.stringify(rs[i]));
+		callback(i);
+		
+	}
+	
+	var sort = ["sort1","sort2","sort3","sort4"];
+	var rs = [];
+	var i = 0;
+	var j = 0;
+	selectLN(sort,i);
+    
 });
 router.get('/news03', function (req, res, next) {
 	if(req.session.islogin){
@@ -438,12 +475,49 @@ router.get('/news03', function (req, res, next) {
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    res.render('news03', {
-        title: '学术论文',
-		status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
-		test:res.locals.islogin,
-		list: req.session.list
-    });
+		client=usr.connect();
+	function selectLN(sort,i){
+		usr.selectLatest(client,sort[j],function (result) {
+		for(var o in result){
+			var time = JSON.stringify(result[o].news_date);
+			time = time.substring(1,11);
+			result[o].news_date = time;
+			}
+		console.log("its done:"+sort[j]);
+		j++;
+		
+		donext(result,i,function(i){
+			console.log("i:"+i);
+			i++;
+			if(i<4)
+				selectLN(sort,i)
+			else{
+				req.session.list = rs;
+				 res.render('news03', {
+						title: '学术论文',
+						status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
+						test:res.locals.islogin,
+						list: req.session.list
+					});
+				}
+			});
+		});
+	}
+	
+	function donext(res,i,callback)
+	{	
+		rs[i]= res;
+		console.log(i+":"+JSON.stringify(rs[i]));
+		callback(i);
+		
+	}
+	
+	var sort = ["sort1","sort2","sort3","sort4"];
+	var rs = [];
+	var i = 0;
+	var j = 0;
+	selectLN(sort,i);
+   
 });
 router.get('/news04', function (req, res, next) {
 	if(req.session.islogin){
@@ -452,12 +526,48 @@ router.get('/news04', function (req, res, next) {
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    res.render('news04', {
-        title: '慢病咨询',
-		status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
-		test:res.locals.islogin,
-		list: req.session.list
-    });
+	client=usr.connect();
+	function selectLN(sort,i){
+		usr.selectLatest(client,sort[j],function (result) {
+		for(var o in result){
+			var time = JSON.stringify(result[o].news_date);
+			time = time.substring(1,11);
+			result[o].news_date = time;
+			}
+		console.log("its done:"+sort[j]);
+		j++;
+		
+		donext(result,i,function(i){
+			console.log("i:"+i);
+			i++;
+			if(i<4)
+				selectLN(sort,i)
+			else{
+				req.session.list = rs;
+				res.render('news04', {
+						title: '慢病咨询',
+						status1: '',status2: '',status3: 'active',status4: '',status5: '',status6: '',status7: '',status8: '',status9: '',
+						test:res.locals.islogin,
+						list: req.session.list
+					});
+				}
+			});
+		});
+	}
+	
+	function donext(res,i,callback)
+	{	
+		rs[i]= res;
+		console.log(i+":"+JSON.stringify(rs[i]));
+		callback(i);
+		
+	}
+	
+	var sort = ["sort1","sort2","sort3","sort4"];
+	var rs = [];
+	var i = 0;
+	var j = 0;
+	selectLN(sort,i);
 });
 router.get('/news_details', function (req, res, next) {
 	if(req.session.islogin){

@@ -27,6 +27,7 @@ git pull(输入用户名和密码)
 copy bin/www.example bin/www (第一次运行即可)
 npm install supervisor -g（仅在第一次运行时输入）
 npm install
+在node_modules目录下创建文件夹dao, 将根目录下的dbconnect.js放入
 npm start
 ```
 浏览器访问'localhost:3000'
